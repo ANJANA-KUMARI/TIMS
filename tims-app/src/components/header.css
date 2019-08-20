@@ -39,6 +39,8 @@
 
 .header-profile .menu-opened{
     display: block;
+    left: 10px;
+    /* padding: 5px 10px; */
 }
 
 .header-profile .user-menu a{
@@ -46,4 +48,9 @@
     text-decoration: none;
     color: #000000;
 
+}
+
+.header-profile .menu-item{
+    font-size: 13px;
+    font-weight: bold;
 }

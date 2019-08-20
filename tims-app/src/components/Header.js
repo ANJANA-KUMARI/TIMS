@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 import "./header.css";
 
 const HeaderLogo = () => (
@@ -33,16 +35,18 @@ class HeaderProfile extends Component {
                         {this.props.name}
                     </span>
                     <span>
-                        <img src="./image/down.png" style={{ width: "15px", margin: "0px 10px" }} />
+                        <img src="/image/down.png" style={{ width: "15px", margin: "0px 10px" }} />
                     </span>
                 </div>
 
                 <div className={this.state.isMenuOpened ? "shadow user-menu menu-opened " : "shadow user-menu "}>
-                    <a href="#">Profile</a>
-                    <a href="#">Setting</a>
-                    <a href="#">LogOut</a>
+                    <MenuList>
+                        <MenuItem className="menu-item">Profile</MenuItem>
+                        <MenuItem className="menu-item">Setting</MenuItem>
+                        <MenuItem className="menu-item">Logout</MenuItem>
+                    </MenuList>
                 </div>
-            </div>
+            </div >
         )
     }
 }

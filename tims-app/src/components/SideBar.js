@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+import { ROUTE_PATHS } from '../Constants';
 
 
 class SideBar extends Component {
@@ -8,49 +10,49 @@ class SideBar extends Component {
             id: 1,
             icon: "https://img.icons8.com/ultraviolet/80/000000/class.png",
             title: "Classes",
-            url: "#"
+            url: ROUTE_PATHS.CLASSES
         },
         {
             id: 2,
             icon: "https://img.icons8.com/color/48/000000/attendance-mark.png",
             title: "Attendance",
-            url: "#"
+            url: "/attendance/"
         },
         {
             id: 3,
             icon: "https://img.icons8.com/ultraviolet/40/000000/students.png",
             title: "Students",
-            url: "#"
+            url: "/students/"
         },
         {
             id: 4,
             icon: "https://img.icons8.com/ultraviolet/40/000000/employee-card.png",
             title: "Employees",
-            url: "#"
+            url: "/employees/"
         },
         {
             id: 5,
             icon: "https://img.icons8.com/ultraviolet/40/000000/parent-guardian.png",
             title: "Parents",
-            url: "#"
+            url: "/parents  /"
         },
         {
             id: 6,
             icon: "https://img.icons8.com/ultraviolet/40/000000/no-hidden-fee.png",
             title: "Fee",
-            url: "#"
+            url: "/fee/"
         },
         {
             id: 7,
             icon: "https://img.icons8.com/ultraviolet/40/000000/planner.png",
             title: "TimeTable",
-            url: "#"
+            url: "/timetable/"
         },
         {
             id: 8,
             icon: "https://img.icons8.com/ultraviolet/40/000000/saving-book.png",
             title: "Study Material",
-            url: "#"
+            url: "/study-material/"
         }
 
     ]
@@ -69,7 +71,7 @@ class SideBar extends Component {
 }
 
 const SideBarItem = ({ icon, title, url }) => (
-    <a style={sideBarMenuItemStyle().a} href={url} className="side-menu-item">
+    <Link style={sideBarMenuItemStyle().a} to={url} className="side-menu-item">
         <div style={sideBarMenuItemStyle().wrap}>
             <span >
                 <img style={sideBarMenuItemStyle().icon} src={icon}></img>
@@ -78,7 +80,7 @@ const SideBarItem = ({ icon, title, url }) => (
                 <span style={sideBarMenuItemStyle().title}>{title}</span>
             </div>
         </div>
-    </a>
+    </Link>
 )
 
 const sideBarMenuItemStyle = (color) => {
