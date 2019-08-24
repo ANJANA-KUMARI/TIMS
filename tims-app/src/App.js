@@ -1,11 +1,12 @@
-import React from 'react';
-import SideBar from './components/SideBar';
+import React from "react";
+import SideBar from "./components/SideBar";
 import Header from "./components/Header";
 import HomePage from "./components/HomePage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ClassDashboard from "./ClassMng/components/ClassDashboard";
-import './App.css';
-import { ROUTE_PATHS } from './Constants';
+import SubjectsPage from "./ClassMng/containers/SubjectsPage";
+import "./App.css";
+import { ROUTE_PATHS } from "./Constants";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <div style={sideBarStyle.content}>
             <Route path={ROUTE_PATHS.HOMEPAGE} exact component={HomePage} />
             <Route path={ROUTE_PATHS.CLASSES} component={ClassDashboard} />
+            <Route path={ROUTE_PATHS.SUBJECTS} component={SubjectsPage} />
             {/* <Route path="/" component={HomePage} /> */}
           </div>
         </div>
@@ -30,7 +32,6 @@ function App() {
 }
 
 const sideBarStyle = {
-
   root: {
     width: "100%",
     height: "100vh"
@@ -53,6 +54,6 @@ const sideBarStyle = {
     height: "100%",
     width: "100%"
   }
-}
+};
 
 export default App;

@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import { Card, CardHeader } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
-import '../ClassMng.css';
-import AddSubject from './AddSubject';
+import React, { Component } from "react";
+import { Card, CardHeader } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+import "../ClassMng.css";
+import AddSubjectForm from "../containers/AddSubjectForm";
+import { Link } from "react-router-dom";
+import { ROUTE_PATHS } from "../../Constants";
 
 class ClassDashboard extends Component {
   state = {
@@ -10,7 +12,6 @@ class ClassDashboard extends Component {
   };
 
   toggleAddSubjectForm = () => {
-    console.log('Yaluuuuuuuuuuuuuu);');
     this.setState({
       showAddSubjectForm: !this.state.showAddSubjectForm
     });
@@ -20,15 +21,17 @@ class ClassDashboard extends Component {
     return (
       <div className="shortcut-wrap">
         <Card className="class-dashboard-shortcut">
-          <CardHeader
-            avatar={
-              <Avatar>
-                <img className="w-100" src="/image/subject.svg" />
-              </Avatar>
-            }
-            title="Subjects"
-            subheader="6"
-          />
+          <Link to={ROUTE_PATHS.SUBJECTS}>
+            <CardHeader
+              avatar={
+                <Avatar>
+                  <img className="w-100" src="/image/subject.svg" />
+                </Avatar>
+              }
+              title="Subjects"
+              subheader="6"
+            />
+          </Link>
         </Card>
 
         <Card className="class-dashboard-shortcut">
@@ -69,9 +72,9 @@ class ClassDashboard extends Component {
         </Card>
 
         {this.state.showAddSubjectForm ? (
-          <AddSubject onCancelPopup={this.toggleAddSubjectForm} />
+          <AddSubjectForm onCancelPopup={this.toggleAddSubjectForm} />
         ) : (
-          ''
+          ""
         )}
       </div>
     );
