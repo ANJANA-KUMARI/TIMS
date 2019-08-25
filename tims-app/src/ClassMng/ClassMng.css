@@ -2,27 +2,29 @@
   font-weight: bold !important;
 }
 
-.class-dashboard-shortcut .MuiCardHeader-content{
-    display: flex;
-    justify-content: space-between;
+.class-dashboard-shortcut .MuiCardHeader-content {
+  display: flex;
+  justify-content: space-between;
 }
 
 .class-dashboard-shortcut .MuiCardHeader-subheader {
-     font-weight: bold;
-     font-size: 15px;
-
+  font-weight: bold;
+  font-size: 15px;
 }
 
-.shortcut-wrap{
-    padding: 20px;
+.shortcut-wrap {
+  padding: 20px;
 }
 
-.class-dashboard-shortcut{
-    width: 20%;
-    margin-right: 20px !important;
+.class-dashboard-shortcut {
+  width: 20%;
+  margin-right: 20px !important;
 }
 
-.shortcut-wrap{
-    display: flex;
+.shortcut-wrap {
+  display: flex;
 }
 
+.class-dashboard-shortcut:hover {
+  cursor: pointer;
+}

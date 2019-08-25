@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import "./AddSubject.css";
-import { addSubject } from "../../actions/subjectActions";
 import { SketchPicker } from "react-color";
 import reactCSS from "reactcss";
 
@@ -26,7 +25,10 @@ class AddSubject extends Component {
       a: "1"
     },
     colorHex: "",
-    name: ""
+    name: "",
+    usedColorList: this.props.usedColorList,
+    hasError: false,
+    errorMsg: ""
   };
 
   handleOnClickCreate = () => {
@@ -47,10 +49,17 @@ class AddSubject extends Component {
   };
 
   handleColorChange = (color, event) => {
-    this.setState({
-      color: color.rgb,
-      colorHex: color.hex
-    });
+    if (this.state.usedColorList.indexOf(color.hex) !== -1) {
+      this.setState({
+        hasError: true,
+        errorMsg: "Selected Color is already used. Please select another color!"
+      });
+    } else {
+      this.setState({
+        color: color.rgb,
+        colorHex: color.hex
+      });
+    }
   };
 
   handleNameChange = event => {
@@ -66,9 +75,7 @@ class AddSubject extends Component {
           width: "36px",
           height: "14px",
           borderRadius: "2px",
-          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${
-            this.state.color.b
-          }, ${this.state.color.a})`
+          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`
         },
         swatch: {
           padding: "5px",
@@ -154,6 +161,11 @@ class AddSubject extends Component {
                     </div>
                   ) : null}
                 </div>
+                {this.state.hasError ? (
+                  <div>
+                    <span>{this.state.errorMsg}</span>
+                  </div>
+                ) : null}
               </div>
             </CardContent>
 

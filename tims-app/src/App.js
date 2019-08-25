@@ -4,7 +4,7 @@ import SignInSide from "./components/SignInSide";
 import "./App.css";
 
 function App() {
-  return <SignInSide />;
+  return <Dashboard />;
 }
 
 export default App;

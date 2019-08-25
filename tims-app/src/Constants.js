@@ -1,6 +1,7 @@
 export const ROUTE_PATHS = {
-  CLASSES: "/classes/",
-  SUBJECTS: "/subjects",
+  CLASS_DASHBOARD: "/classes-dashboard/",
+  TUTION_CLASS: "/tution-class/",
+  SUBJECTS: "/subjects/",
   ATTENDENCE: "/attendance/",
   STUDENTS: "/students/",
   EMPLOYEES: "/employees/",
@@ -11,4 +12,4 @@ export const ROUTE_PATHS = {
   HOMEPAGE: "/"
 };
 
-export const API_PATH = "localhost:5000";
+export const API_PATH = "http://localhost:5000/v1";

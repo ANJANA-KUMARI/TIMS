@@ -1,7 +1,7 @@
 import { API_PATH } from "../../Constants";
 import axios from "axios";
 
-const API = `${API_PATH}/subjects`;
+const API = `${API_PATH}/subject`;
 
 export const createSubject = subject => {
   return axios.post(`${API}`, subject);
