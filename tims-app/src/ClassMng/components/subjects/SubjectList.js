@@ -1,11 +1,46 @@
 import React, { Component } from "react";
 import Subject from "./Subject";
-import { display } from "@material-ui/system";
+import AddSubjectForm from "../../containers/AddSubjectForm";
+import { ADD_SUBJECT_POPUP_MODE } from "./AddSubject";
 
-export const SubjectList = ({ subjects }) => (
-  <div style={{ display: "flex", padding: "10px" }}>
-    {subjects.map((s, i, a) => (
-      <Subject subject={s} key={i} />
-    ))}
-  </div>
-);
+export class SubjectList extends Component {
+  state = {
+    showUpdatePopUp: false,
+    subjectToUpdate: null
+  };
+
+  toggleUpdatePopUp = () => {
+    this.setState({
+      showUpdatePopUp: !this.state.showUpdatePopUp
+    });
+  };
+
+  handleUpdate = subject => {
+    this.toggleUpdatePopUp();
+    this.setState({
+      subjectToUpdate: subject
+    });
+  };
+
+  render() {
+    return (
+      <div style={{ display: "flex", padding: "20px", flexWrap: "wrap" }}>
+        {this.props.subjects.map((s, i, a) => (
+          <Subject
+            subject={s}
+            key={i}
+            updateSubject={this.handleUpdate}
+            deleteSubject={this.props.onDeleteSubject}
+          />
+        ))}
+        {this.state.showUpdatePopUp ? (
+          <AddSubjectForm
+            mode={ADD_SUBJECT_POPUP_MODE.UPDATE}
+            onCancelPopup={this.toggleUpdatePopUp}
+            subjectToUpdate={this.state.subjectToUpdate}
+          />
+        ) : null}
+      </div>
+    );
+  }
+}

@@ -1,15 +1,14 @@
 import { connect } from "react-redux";
 import AddSubjectComponent from "../components/subjects/AddSubject";
-import { addSubjectAsync } from "../actions/subjectActions";
+import { addSubjectAsync, updateSubjectAsync } from "../actions/subjectActions";
 
 const mapStateToProps = state => ({
-  usedColorList: state.subjects.subjectList.map(subject => {
-    return subject.color;
-  })
+  currentSubjectList: state.subjects.subjectList
 });
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   onCreate: subject => dispatch(addSubjectAsync(subject)),
+  onUpdate: subject => dispatch(updateSubjectAsync(subject)),
   onClose: () => ownprops.onCancelPopup()
 });
 

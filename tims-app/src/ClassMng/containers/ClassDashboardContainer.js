@@ -1,12 +1,15 @@
-import React from "react";
 import { connect } from "react-redux";
 import ClassDashboard from "../components/ClassDashboard";
+import { getSubjectsAsync } from "../actions/subjectActions";
+const mapStateToProps = state => ({
+  subjectsCount: state.subjects.subjectList.length
+});
 
-const ClassDashboardContainer = ({ dispatch }) => {
-  return <ClassDashboard />;
-};
+const mapDispatchToProps = (dispatch, ownprops) => ({
+  fetchSubjects: () => dispatch(getSubjectsAsync())
+});
 
 export default connect(
-  null,
-  null
-)(ClassDashboardContainer);
+  mapStateToProps,
+  mapDispatchToProps
+)(ClassDashboard);

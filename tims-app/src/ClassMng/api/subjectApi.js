@@ -16,5 +16,5 @@ export const updateSubject = subject => {
 };
 
 export const deleteSubject = subjectId => {
-  return axios.post(`${API}/delete`, { subjectId });
+  return axios.post(`${API}/delete`, { idToDelete: subjectId });
 };

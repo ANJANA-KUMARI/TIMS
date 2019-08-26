@@ -48,7 +48,7 @@ class AddTutionClass extends Component {
 
   handleChange = (event, changedName) => {
     this.setState({
-      changedName: event.target.value
+      [changedName]: event.target.value
     });
   };
 
@@ -68,23 +68,16 @@ class AddTutionClass extends Component {
             </IconButton>
             <CardContent>
               <div className="input-wrap">
-                <TextField
-                  id="outlined-subject-input"
-                  label="Subject Name"
-                  type="text"
-                  onInput={this.handleNameChange}
-                  name="subject_name"
-                  margin="normal"
-                  variant="outlined"
-                />
                 <FormControl variant="outlined">
                   <InputLabel htmlFor="subject">Subject</InputLabel>
                   <Select
                     value={this.state.selectedSubject}
-                    onChange={this.handleChange}
+                    onChange={event => {
+                      this.handleChange(event, "selectedSubject");
+                    }}
                     input={
                       <OutlinedInput
-                        labelWidth={100}
+                        labelWidth={55}
                         name="subject"
                         id="subject"
                       />
@@ -99,6 +92,41 @@ class AddTutionClass extends Component {
                     })}
                   </Select>
                 </FormControl>
+
+                <FormControl variant="outlined">
+                  <InputLabel htmlFor="subject">Subject</InputLabel>
+                  <Select
+                    value={this.state.selectedSubject}
+                    onChange={event => {
+                      this.handleChange(event, "selectedSubject");
+                    }}
+                    input={
+                      <OutlinedInput
+                        labelWidth={55}
+                        name="subject"
+                        id="subject"
+                      />
+                    }
+                  >
+                    {this.state.subjects.map((s, i, a) => {
+                      return (
+                        <MenuItem key={i} value={s.id}>
+                          {s.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+
+                <TextField
+                  id="outlined-subject-input"
+                  label="Subject Name"
+                  type="text"
+                  onInput={this.handleNameChange}
+                  name="subject_name"
+                  margin="normal"
+                  variant="outlined"
+                />
               </div>
             </CardContent>
 

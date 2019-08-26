@@ -13,26 +13,48 @@ import "./AddSubject.css";
 import { SketchPicker } from "react-color";
 import reactCSS from "reactcss";
 
-class AddSubject extends Component {
-  colorList = ["#4dabf5", "#757ce8", "#ff8a65", "#ffff00", "#69f0ae"];
+export const ADD_SUBJECT_POPUP_MODE = {
+  INSERT: "INSERT",
+  UPDATE: "UPDATE"
+};
 
+class AddSubject extends Component {
   state = {
     displayColorPicker: false,
-    color: {
-      r: "241",
-      g: "112",
-      b: "19",
-      a: "1"
-    },
     colorHex: "",
     name: "",
-    usedColorList: this.props.usedColorList,
-    hasError: false,
-    errorMsg: ""
+    currentSubjectList: this.props.currentSubjectList,
+    colorErrorMsg: "",
+    nameErrorMsg: "",
+    mode: this.props.mode,
+    titleToUpdate: "Update the Subject",
+    titleToAdd: "Add a Subject"
   };
 
+  componentDidMount() {
+    if (this.state.mode === ADD_SUBJECT_POPUP_MODE.UPDATE) {
+      this.setState({
+        name: this.props.subjectToUpdate.name,
+        colorHex: this.props.subjectToUpdate.color
+      });
+    }
+  }
+
   handleOnClickCreate = () => {
-    this.props.onCreate({ name: this.state.name, color: this.state.colorHex });
+    if (this.state.mode === ADD_SUBJECT_POPUP_MODE.UPDATE) {
+      const updatedSubject = {
+        id: this.props.subjectToUpdate.id,
+        name: this.state.name,
+        color: this.state.colorHex
+      };
+      this.props.onUpdate(updatedSubject);
+    } else {
+      this.props.onCreate({
+        name: this.state.name,
+        color: this.state.colorHex
+      });
+    }
+
     this.handleOnClickCancel();
   };
 
@@ -49,23 +71,39 @@ class AddSubject extends Component {
   };
 
   handleColorChange = (color, event) => {
-    if (this.state.usedColorList.indexOf(color.hex) !== -1) {
+    const usedColorList = this.state.currentSubjectList.filter(s => {
+      return s.color === color.hex;
+    });
+    if (usedColorList.length !== 0) {
       this.setState({
-        hasError: true,
-        errorMsg: "Selected Color is already used. Please select another color!"
+        colorErrorMsg:
+          "Selected Color is already used. Please select another color!",
+        displayColorPicker: false
       });
     } else {
       this.setState({
-        color: color.rgb,
-        colorHex: color.hex
+        colorHex: color.hex,
+        colorErrorMsg: ""
+        // displayColorPicker: false
       });
     }
   };
 
   handleNameChange = event => {
-    this.setState({
-      name: event.target.value
+    const currentSubjects = this.state.currentSubjectList.filter(s => {
+      return s.name === event.target.value;
     });
+    if (currentSubjects.length !== 0) {
+      this.setState({
+        nameErrorMsg:
+          "Entered Subject is already used. Please enter another Subject!"
+      });
+    } else {
+      this.setState({
+        name: event.target.value,
+        nameErrorMsg: ""
+      });
+    }
   };
 
   render() {
@@ -75,7 +113,7 @@ class AddSubject extends Component {
           width: "36px",
           height: "14px",
           borderRadius: "2px",
-          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`
+          background: this.state.colorHex
         },
         swatch: {
           padding: "5px",
@@ -123,28 +161,15 @@ class AddSubject extends Component {
                   name="subject_name"
                   margin="normal"
                   variant="outlined"
+                  value={this.state.name}
                 />
-                {/* <TextField
-                  id="outlined-color"
-                  select
-                  label="Color"
-                  value={this.state.color}
-                  onChange={this.handleColorChange}
-                  margin="normal"
-                  variant="outlined"
-                >
-
-                  {this.colorList.map((value) => {
-                    return (
-                      <MenuItem key={this.colorList.indexOf(value)} value={this.colorList.indexOf(value)}>
-                        <div className="subject-color-item" style={{ backgroundColor: value }}>
-
-                        </div>
-                      </MenuItem>
-                    )
-
-                  })}
-                </TextField> */}
+                {this.state.nameErrorMsg.length > 0 ? (
+                  <div>
+                    <span style={{ color: "red" }}>
+                      {this.state.nameErrorMsg}
+                    </span>
+                  </div>
+                ) : null}
 
                 <div>
                   <h6>Color: </h6>
@@ -155,15 +180,17 @@ class AddSubject extends Component {
                     <div style={styles.popover}>
                       <div style={styles.cover} onClick={this.handleClose} />
                       <SketchPicker
-                        color={this.state.color}
+                        color={this.state.colorHex}
                         onChange={this.handleColorChange}
                       />
                     </div>
                   ) : null}
                 </div>
-                {this.state.hasError ? (
+                {this.state.colorErrorMsg.length > 0 ? (
                   <div>
-                    <span>{this.state.errorMsg}</span>
+                    <span style={{ color: "red" }}>
+                      {this.state.colorErrorMsg}
+                    </span>
                   </div>
                 ) : null}
               </div>
@@ -174,6 +201,12 @@ class AddSubject extends Component {
                 className="popup-create-btn"
                 aria-label="create"
                 onClick={this.handleOnClickCreate}
+                disabled={
+                  this.state.name.length === 0 ||
+                  this.state.colorHex.length === 0 ||
+                  this.state.colorErrorMsg.length !== 0 ||
+                  this.state.nameErrorMsg.length !== 0
+                }
               >
                 <CheckCircle />
               </IconButton>
