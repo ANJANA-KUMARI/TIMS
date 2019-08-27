@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SideBar from './SideBar';
 import Header from './Header';
 import HomePage from './HomePage';
-import ClassDashboard from '../ClassMng/components/ClassDashboard';
+import ClassDashboard from '../ClassMng/containers/ClassDashboardContainer';
 import ClassesPage from '../ClassMng/components/tutionClass/ClassesPage';
 import SubjectsPage from '../ClassMng/containers/SubjectsPage';
 import { Route } from 'react-router-dom';
