@@ -4,6 +4,7 @@ import MenuList from '@material-ui/core/MenuList';
 import './header.css';
 import { Link } from 'react-router-dom';
 import { ROUTE_PATHS } from '../Constants';
+import { connect } from 'react-redux';
 
 const HeaderLogo = () => (
   <Link to={ROUTE_PATHS.HOMEPAGE}>
@@ -72,15 +73,24 @@ class Header extends Component {
     }
   ];
 
-  state = {};
   render() {
     return (
       <div className="header-wrap">
-        <HeaderLogo />
+        <div className="logo-wrap">
+          <HeaderLogo />
+          <h5>{this.props.title}</h5>
+        </div>
         <HeaderProfile image={this.users[0].image} name={this.users[0].name} />
       </div>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  title: state.ui.dashboardHeaderTitle
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Header);
