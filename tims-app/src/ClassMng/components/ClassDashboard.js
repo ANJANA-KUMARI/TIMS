@@ -6,12 +6,30 @@ import AddSubjectForm from "../containers/AddSubjectForm";
 import AddTutionClassForm from "../containers/AddTutionClassForm";
 import { Link } from "react-router-dom";
 import { ROUTE_PATHS } from "../../Constants";
+import { ADD_SUBJECT_POPUP_MODE } from "./subjects/AddSubject";
 
 class ClassDashboard extends Component {
   state = {
     showAddSubjectForm: false,
-    showAddTutionClassForm: false
+    showAddTutionClassForm: false,
+    subjectsCount: this.props.subjectsCount
   };
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.fetchSubjects();
+  }
+
+  componentDidUpdate(prevProp) {
+    if (this.props.subjectsCount !== prevProp.subjectsCount) {
+      this.setState({
+        subjectsCount: this.props.subjectsCount
+      });
+    }
+  }
 
   toggleAddSubjectForm = () => {
     this.setState({
@@ -36,11 +54,11 @@ class ClassDashboard extends Component {
             <CardHeader
               avatar={
                 <Avatar>
-                  <img className="w-100" src="/image/subject.svg" />
+                  <img className="w-100" src="/image/subjects.svg" />
                 </Avatar>
               }
               title="Subjects"
-              subheader="6"
+              subheader={this.state.subjectsCount}
             />
           </Link>
         </Card>
@@ -53,7 +71,7 @@ class ClassDashboard extends Component {
             <CardHeader
               avatar={
                 <Avatar>
-                  <img className="w-100 h-100" src="/image/class.svg" />
+                  <img className="h-100" src="/image/clzes.svg" />
                 </Avatar>
               }
               title="Classes"
@@ -89,7 +107,7 @@ class ClassDashboard extends Component {
           <CardHeader
             avatar={
               <Avatar>
-                <img className="w-100 h-100" src="/image/class.svg" />
+                <img className="w-100 h-100" src="/image/subject.svg" />
               </Avatar>
             }
             title="Add Subject"
@@ -97,10 +115,11 @@ class ClassDashboard extends Component {
         </Card>
 
         {this.state.showAddSubjectForm ? (
-          <AddSubjectForm onCancelPopup={this.toggleAddSubjectForm} />
-        ) : (
-          ""
-        )}
+          <AddSubjectForm
+            mode={ADD_SUBJECT_POPUP_MODE.INSERT}
+            onCancelPopup={this.toggleAddSubjectForm}
+          />
+        ) : null}
       </div>
     );
   }

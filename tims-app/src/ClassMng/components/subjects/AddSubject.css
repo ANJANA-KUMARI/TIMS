@@ -45,6 +45,10 @@
   color: #03a9f4 !important;
 }
 
+.popup-create-btn:disabled {
+  color: #aaaaaa !important;
+}
+
 .add-subject-popup .input-wrap {
   width: 100%;
   padding-bottom: 20px;
@@ -62,4 +66,14 @@
   width: 100%;
   height: 30px;
   border-radius: 5px;
+}
+
+.MuiIconButton-root {
+  color: #03a9f4 !important;
+  padding: 5px 5px !important;
+}
+
+.subject-cards {
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
