@@ -84,7 +84,6 @@ class AddSubject extends Component {
       this.setState({
         colorHex: color.hex,
         colorErrorMsg: ""
-        // displayColorPicker: false
       });
     }
   };
@@ -143,7 +142,13 @@ class AddSubject extends Component {
         <div className="add-subject-backdrop" />
         <div className="add-subject-form">
           <Card className="popup-card">
-            <CardHeader title="Add new subject" />
+            <CardHeader
+              title={
+                this.state.mode === ADD_SUBJECT_POPUP_MODE.UPDATE
+                  ? this.state.titleToUpdate
+                  : this.state.titleToAdd
+              }
+            />
             <IconButton
               className="popup-cancel-btn"
               aria-label="cancel"

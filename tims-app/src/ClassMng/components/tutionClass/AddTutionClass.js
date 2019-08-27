@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   Card,
   CardActions,
@@ -12,6 +13,7 @@ import {
   InputLabel,
   OutlinedInput
 } from "@material-ui/core";
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import "./AddTutionClass.css";
 
@@ -26,8 +28,11 @@ class AddTutionClass extends Component {
     selectedSubject: -1,
     selectedGrade: [],
     selectedTeacher: -1,
-    selectedType: -1
+    selectedType: -1,
+    selectedDate: new Date()
   };
+
+  handleDateChange = () => {};
 
   handleOnClickCreate = () => {
     const tutionClass = {
@@ -68,65 +73,133 @@ class AddTutionClass extends Component {
             </IconButton>
             <CardContent>
               <div className="input-wrap">
-                <FormControl variant="outlined">
-                  <InputLabel htmlFor="subject">Subject</InputLabel>
-                  <Select
-                    value={this.state.selectedSubject}
-                    onChange={event => {
-                      this.handleChange(event, "selectedSubject");
-                    }}
-                    input={
-                      <OutlinedInput
-                        labelWidth={55}
-                        name="subject"
-                        id="subject"
-                      />
-                    }
-                  >
-                    {this.state.subjects.map((s, i, a) => {
-                      return (
-                        <MenuItem key={i} value={s.id}>
-                          {s.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
+                <div>
+                  <FormControl variant="outlined">
+                    <InputLabel htmlFor="subject">Subject</InputLabel>
+                    <Select
+                      value={this.state.selectedSubject}
+                      onChange={event => {
+                        this.handleChange(event, "selectedSubject");
+                      }}
+                      input={
+                        <OutlinedInput
+                          labelWidth={55}
+                          name="subject"
+                          id="subject"
+                        />
+                      }
+                    >
+                      {this.state.subjects.map((s, i, a) => {
+                        return (
+                          <MenuItem key={i} value={s.id}>
+                            {s.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
 
-                <FormControl variant="outlined">
-                  <InputLabel htmlFor="subject">Subject</InputLabel>
-                  <Select
-                    value={this.state.selectedSubject}
-                    onChange={event => {
-                      this.handleChange(event, "selectedSubject");
-                    }}
-                    input={
-                      <OutlinedInput
-                        labelWidth={55}
-                        name="subject"
-                        id="subject"
-                      />
-                    }
-                  >
-                    {this.state.subjects.map((s, i, a) => {
-                      return (
-                        <MenuItem key={i} value={s.id}>
-                          {s.name}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
+                <div>
+                  <FormControl variant="outlined">
+                    <InputLabel htmlFor="subject">Grade</InputLabel>
+                    <Select
+                      value={this.state.selectedSubject}
+                      onChange={event => {
+                        this.handleChange(event, "selectedSubject");
+                      }}
+                      input={
+                        <OutlinedInput
+                          labelWidth={55}
+                          name="subject"
+                          id="subject"
+                        />
+                      }
+                    >
+                      {this.state.subjects.map((s, i, a) => {
+                        return (
+                          <MenuItem key={i} value={s.id}>
+                            {s.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
 
-                <TextField
-                  id="outlined-subject-input"
-                  label="Subject Name"
-                  type="text"
-                  onInput={this.handleNameChange}
-                  name="subject_name"
-                  margin="normal"
-                  variant="outlined"
-                />
+                <div>
+                  <FormControl variant="outlined">
+                    <InputLabel htmlFor="subject">Teacher</InputLabel>
+                    <Select
+                      value={this.state.selectedSubject}
+                      onChange={event => {
+                        this.handleChange(event, "selectedSubject");
+                      }}
+                      input={
+                        <OutlinedInput
+                          labelWidth={55}
+                          name="subject"
+                          id="subject"
+                        />
+                      }
+                    >
+                      {this.state.subjects.map((s, i, a) => {
+                        return (
+                          <MenuItem key={i} value={s.id}>
+                            {s.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div>
+                  <FormControl variant="outlined">
+                    <InputLabel htmlFor="subject">Type</InputLabel>
+                    <Select
+                      value={this.state.selectedSubject}
+                      onChange={event => {
+                        this.handleChange(event, "selectedSubject");
+                      }}
+                      input={
+                        <OutlinedInput
+                          labelWidth={55}
+                          name="subject"
+                          id="subject"
+                        />
+                      }
+                    >
+                      {this.state.subjects.map((s, i, a) => {
+                        return (
+                          <MenuItem key={i} value={s.id}>
+                            {s.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div>
+                  <TextField
+                    id="outlined-subject-input"
+                    label="Venue"
+                    type="text"
+                    onInput={this.handleNameChange}
+                    name="subject_name"
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </div>
+                <div>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DateTimePicker
+                      value={this.state.selectedDate}
+                      onChange={this.handleDateChange}
+                    />
+                  </MuiPickersUtilsProvider>
+                </div>
               </div>
             </CardContent>
 

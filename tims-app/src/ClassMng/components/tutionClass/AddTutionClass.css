@@ -6,7 +6,7 @@
   right: 0px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: normal;
 }
 
 .add-tution-class-popup {
@@ -63,4 +63,13 @@
 
 .add-tution-class-popup .MuiFormControl-root {
   min-width: 35% !important;
+  margin-bottom: 20px;
+}
+
+.MuiFormControl-marginNormal {
+  margin-top: 0px !important;
+}
+
+.MuiPickersModal-dialogRoot .MuiButtonBase-root {
+  color: #000 !important;
 }
