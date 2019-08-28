@@ -11,6 +11,14 @@ export const getTutionClass = () => {
   return axios.get(`${API}`);
 };
 
+export const getGrades = () => {
+  return axios.get(`${API}/grade`);
+};
+
+export const getTutionClassTypes = () => {
+  return axios.get(`${API}/type`);
+};
+
 export const updateTutionClass = tutionClass => {
   return axios.post(`${API}/update`, tutionClass);
 };

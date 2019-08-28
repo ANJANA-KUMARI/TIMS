@@ -15,21 +15,24 @@ import {
 } from "@material-ui/core";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Cancel, CheckCircle } from "@material-ui/icons";
+import Chip from "@material-ui/core/Chip";
 import "./AddTutionClass.css";
 
 class AddTutionClass extends Component {
   state = {
     subjects: this.props.subjectList,
-    grades: this.props.grades,
+    grades: this.props.gradeList,
     teachers: this.props.teacherList,
-    types: this.props.types,
+    types: this.props.tutionClassTypeList,
     datetime: new Date(),
     venue: "",
     selectedSubject: -1,
     selectedGrade: [],
     selectedTeacher: -1,
     selectedType: -1,
-    selectedDate: new Date()
+    selectedDate: new Date(),
+    gradeToDisplay: -1,
+    nameErrorMsg: ""
   };
 
   handleDateChange = () => {};
@@ -57,6 +60,39 @@ class AddTutionClass extends Component {
     });
   };
 
+  handleGradeSelect = event => {
+    const currentGrade = this.state.selectedGrade;
+    const selectedGrade = event.target.value;
+    if (currentGrade.includes(selectedGrade)) {
+      alert(
+        `Grade ${selectedGrade} already selected. Please select another Grade!`
+      );
+      return;
+    } else {
+      currentGrade.push(event.target.value);
+      this.setState({
+        selectedGrade: currentGrade,
+        gradeToDisplay: event.target.value
+      });
+    }
+  };
+
+  handleTutionClassTypeSelect = event => {
+    this.setState({
+      selectedType: event.target.value
+    });
+  };
+
+  handleDelete = grade => {
+    const deleteSelectedGrade = this.state.selectedGrade;
+    const indexToDelete = deleteSelectedGrade.indexOf(grade);
+    deleteSelectedGrade.splice(indexToDelete, 1);
+    this.setState({
+      selectedGrade: deleteSelectedGrade,
+      gradeToDisplay: -1
+    });
+  };
+
   render() {
     return (
       <div className="add-tution-class-popup">
@@ -73,60 +109,79 @@ class AddTutionClass extends Component {
             </IconButton>
             <CardContent>
               <div className="input-wrap">
-                <div>
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="subject">Subject</InputLabel>
-                    <Select
-                      value={this.state.selectedSubject}
-                      onChange={event => {
-                        this.handleChange(event, "selectedSubject");
-                      }}
-                      input={
-                        <OutlinedInput
-                          labelWidth={55}
-                          name="subject"
-                          id="subject"
-                        />
-                      }
+                <div style={{ display: "flex" }}>
+                  <div style={{ width: "100%" }}>
+                    <FormControl variant="outlined">
+                      <InputLabel htmlFor="subject">Subject</InputLabel>
+                      <Select
+                        value={this.state.selectedSubject}
+                        onChange={event => {
+                          this.handleChange(event, "selectedSubject");
+                        }}
+                        input={
+                          <OutlinedInput
+                            labelWidth={53}
+                            name="subject"
+                            id="subject"
+                          />
+                        }
+                      >
+                        {this.state.subjects.map((s, i, a) => {
+                          return (
+                            <MenuItem key={i} value={s.id}>
+                              {s.name}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  </div>
+
+                  <div style={{ width: "100%" }}>
+                    <FormControl
+                      style={{ width: "100% !important" }}
+                      variant="outlined"
                     >
-                      {this.state.subjects.map((s, i, a) => {
+                      <InputLabel htmlFor="grade">Grade</InputLabel>
+                      <Select
+                        value={this.state.gradeToDisplay}
+                        onChange={event => {
+                          this.handleGradeSelect(event);
+                        }}
+                        input={
+                          <OutlinedInput
+                            labelWidth={47}
+                            name="grade"
+                            id="grade"
+                          />
+                        }
+                      >
+                        {this.state.grades.map((g, i, a) => {
+                          return (
+                            <MenuItem key={i} value={g.id}>
+                              {g.val}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+
+                    <div>
+                      {this.state.selectedGrade.map((g, i, a) => {
                         return (
-                          <MenuItem key={i} value={s.id}>
-                            {s.name}
-                          </MenuItem>
+                          <Chip
+                            key={i}
+                            label={g}
+                            onDelete={() => {
+                              this.handleDelete(g);
+                            }}
+                            color="primary"
+                          />
                         );
                       })}
-                    </Select>
-                  </FormControl>
+                    </div>
+                  </div>
                 </div>
-
-                <div>
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="subject">Grade</InputLabel>
-                    <Select
-                      value={this.state.selectedSubject}
-                      onChange={event => {
-                        this.handleChange(event, "selectedSubject");
-                      }}
-                      input={
-                        <OutlinedInput
-                          labelWidth={55}
-                          name="subject"
-                          id="subject"
-                        />
-                      }
-                    >
-                      {this.state.subjects.map((s, i, a) => {
-                        return (
-                          <MenuItem key={i} value={s.id}>
-                            {s.name}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                </div>
-
                 <div>
                   <FormControl variant="outlined">
                     <InputLabel htmlFor="subject">Teacher</InputLabel>
@@ -156,24 +211,20 @@ class AddTutionClass extends Component {
 
                 <div>
                   <FormControl variant="outlined">
-                    <InputLabel htmlFor="subject">Type</InputLabel>
+                    <InputLabel htmlFor="type">Type</InputLabel>
                     <Select
-                      value={this.state.selectedSubject}
+                      value={this.state.selectedType}
                       onChange={event => {
-                        this.handleChange(event, "selectedSubject");
+                        this.handleTutionClassTypeSelect(event, "selectedType");
                       }}
                       input={
-                        <OutlinedInput
-                          labelWidth={55}
-                          name="subject"
-                          id="subject"
-                        />
+                        <OutlinedInput labelWidth={35} name="type" id="type" />
                       }
                     >
-                      {this.state.subjects.map((s, i, a) => {
+                      {this.state.types.map((t, i, a) => {
                         return (
-                          <MenuItem key={i} value={s.id}>
-                            {s.name}
+                          <MenuItem key={i} value={t.id}>
+                            {t.type}
                           </MenuItem>
                         );
                       })}

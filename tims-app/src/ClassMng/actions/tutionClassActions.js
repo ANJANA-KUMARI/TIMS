@@ -1,9 +1,17 @@
-import { createTutionClass, getTutionClass } from "../api/tutionClassApi";
+import {
+  createTutionClass,
+  getTutionClass,
+  getGrades,
+  getTutionClassTypes
+} from "../api/tutionClassApi";
 
 export const TutionClassActionTypes = {
   ADD_TUTION_CLASS: "ADD_TUTION_CLASS",
   UPDATE_TUTION_CLASS: "UPDATE_TUTION_CLASS",
-  DELETE_TUTION_CLASS: "DELETE_TUTION_CLASS"
+  DELETE_TUTION_CLASS: "DELETE_TUTION_CLASS",
+  GRADES_LOADED: "GRADES_LOADED",
+  TYPES_LOADED: "TYPES_LOADED",
+  TUTION_CLASS_LOADED: "TUTION_CLASS_LOADED"
 };
 
 // action creators
@@ -23,6 +31,16 @@ const tutionClassDeleted = tutionClassId => ({
   payload: tutionClassId
 });
 
+const gradesLoaded = grades => ({
+  type: TutionClassActionTypes.GRADES_LOADED,
+  payload: grades
+});
+
+const tutionClassTypeLoaded = types => ({
+  type: TutionClassActionTypes.TYPES_LOADED,
+  payload: types
+});
+
 // asyc actions
 export const addTutionClassAsync = tutionClass => {
   return async function(dispatch, getState) {
@@ -35,13 +53,33 @@ export const addTutionClassAsync = tutionClass => {
   };
 };
 
-export const gettutionClasssAsync = () => {
+export const getTutionClasssAsync = () => {
   return async function(dispatch, getState) {
     try {
-      const tutionClasss = await getTutionClass();
-      tutionClasss.data.forEach(tutionClass => {
-        dispatch(tutionClassAdded(tutionClass));
-      });
+      const tutionClass = await getTutionClass();
+      dispatch(tutionClassAdded(tutionClass.data));
+    } catch (err) {
+      // TODO : error
+    }
+  };
+};
+
+export const getGradesAsync = () => {
+  return async function(dispatch, getState) {
+    try {
+      const grades = await getGrades();
+      dispatch(gradesLoaded(grades.data));
+    } catch (err) {
+      // TODO : error
+    }
+  };
+};
+
+export const getTutionClassTypesAsync = () => {
+  return async function(dispatch, getState) {
+    try {
+      const types = await getTutionClassTypes();
+      dispatch(tutionClassTypeLoaded(types.data));
     } catch (err) {
       // TODO : error
     }
