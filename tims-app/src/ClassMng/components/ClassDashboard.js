@@ -23,6 +23,7 @@ class ClassDashboard extends Component {
     this.props.fetchSubjects();
     this.props.fetchGrades();
     this.props.fetchTutionClassTypes();
+    this.props.fetchTeachers();
   }
 
   componentDidUpdate(prevProp) {

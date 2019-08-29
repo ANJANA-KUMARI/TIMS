@@ -65,3 +65,10 @@
   margin-left: 20px;
   color: #fff;
 }
+
+.home-icon-wrap,
+.header-profile {
+  /* now type maluu :) okey yalu :) */
+  display: flex;
+  align-items: center;
+}

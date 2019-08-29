@@ -3,7 +3,8 @@ import { TutionClassActionTypes } from "../ClassMng/actions/tutionClassActions";
 const defaultState = {
   tutionClassList: [],
   gradeList: [],
-  tutionClassTypeList: []
+  tutionClassTypeList: [],
+  teacherList: []
 };
 
 export const tutionClass = (state = defaultState, action) => {
@@ -22,6 +23,11 @@ export const tutionClass = (state = defaultState, action) => {
       return {
         ...state,
         tutionClassTypeList: action.payload
+      };
+    case TutionClassActionTypes.TEACHERS_LOADED:
+      return {
+        ...state,
+        teacherList: action.payload
       };
     default:
       return state;

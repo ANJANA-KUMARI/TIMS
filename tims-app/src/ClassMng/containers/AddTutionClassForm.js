@@ -5,7 +5,8 @@ import { addTutionClassAsync } from "../actions/tutionClassActions";
 const mapStateToProps = state => ({
   subjectList: state.subjects.subjectList,
   gradeList: state.tutionClass.gradeList,
-  tutionClassTypeList: state.tutionClass.tutionClassTypeList
+  tutionClassTypeList: state.tutionClass.tutionClassTypeList,
+  teacherList: state.tutionClass.teacherList
 });
 
 const mapDispatchToProps = (dispatch, ownprops) => ({

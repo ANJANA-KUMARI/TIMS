@@ -2,8 +2,10 @@ import {
   createTutionClass,
   getTutionClass,
   getGrades,
-  getTutionClassTypes
+  getTutionClassTypes,
+  getTeachers
 } from "../api/tutionClassApi";
+import { async } from "q";
 
 export const TutionClassActionTypes = {
   ADD_TUTION_CLASS: "ADD_TUTION_CLASS",
@@ -11,7 +13,8 @@ export const TutionClassActionTypes = {
   DELETE_TUTION_CLASS: "DELETE_TUTION_CLASS",
   GRADES_LOADED: "GRADES_LOADED",
   TYPES_LOADED: "TYPES_LOADED",
-  TUTION_CLASS_LOADED: "TUTION_CLASS_LOADED"
+  TUTION_CLASS_LOADED: "TUTION_CLASS_LOADED",
+  TEACHERS_LOADED: "TEACHERS_LOADED"
 };
 
 // action creators
@@ -39,6 +42,11 @@ const gradesLoaded = grades => ({
 const tutionClassTypeLoaded = types => ({
   type: TutionClassActionTypes.TYPES_LOADED,
   payload: types
+});
+
+const teachersLoaded = teachers => ({
+  type: TutionClassActionTypes.TEACHERS_LOADED,
+  payload: teachers
 });
 
 // asyc actions
@@ -81,6 +89,17 @@ export const getTutionClassTypesAsync = () => {
       const types = await getTutionClassTypes();
       dispatch(tutionClassTypeLoaded(types.data));
     } catch (err) {
+      // TODO : error
+    }
+  };
+};
+
+export const getTeachersAsync = () => {
+  return async function(dispatch, getState) {
+    try {
+      const teachers = await getTeachers();
+      dispatch(teachersLoaded(teachers.data));
+    } catch (error) {
       // TODO : error
     }
   };

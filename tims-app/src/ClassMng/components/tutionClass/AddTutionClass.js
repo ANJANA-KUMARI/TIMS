@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import DateFnsUtils from "@date-io/date-fns";
 import {
   Card,
   CardActions,
@@ -13,7 +12,14 @@ import {
   InputLabel,
   OutlinedInput
 } from "@material-ui/core";
-import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
+import "date-fns";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
 import { Cancel, CheckCircle } from "@material-ui/icons";
 import Chip from "@material-ui/core/Chip";
 import "./AddTutionClass.css";
@@ -31,11 +37,22 @@ class AddTutionClass extends Component {
     selectedTeacher: -1,
     selectedType: -1,
     selectedDate: new Date(),
+    selectedEndTime: new Date(),
     gradeToDisplay: -1,
     nameErrorMsg: ""
   };
 
-  handleDateChange = () => {};
+  handleDateChange = date => {
+    this.setState({
+      selectedDate: date
+    });
+  };
+
+  handleEndTimeChange = date => {
+    this.setState({
+      selectedEndTime: date
+    });
+  };
 
   handleOnClickCreate = () => {
     const tutionClass = {
@@ -83,6 +100,12 @@ class AddTutionClass extends Component {
     });
   };
 
+  handleTeacherSelect = event => {
+    this.setState({
+      selectedTeacher: event.target.value
+    });
+  };
+
   handleDelete = grade => {
     const deleteSelectedGrade = this.state.selectedGrade;
     const indexToDelete = deleteSelectedGrade.indexOf(grade);
@@ -99,7 +122,7 @@ class AddTutionClass extends Component {
         <div className="add-tution-class-backdrop" />
         <div className="add-tution-class-form">
           <Card className="popup-card">
-            <CardHeader title="Add new subject" />
+            <CardHeader title="Add new class" />
             <IconButton
               className="popup-cancel-btn"
               aria-label="cancel"
@@ -109,9 +132,9 @@ class AddTutionClass extends Component {
             </IconButton>
             <CardContent>
               <div className="input-wrap">
-                <div style={{ display: "flex" }}>
-                  <div style={{ width: "100%" }}>
-                    <FormControl variant="outlined">
+                <div className="subject-grade-wrap">
+                  <div className="subject-wrap">
+                    <FormControl className="subject-input" variant="outlined">
                       <InputLabel htmlFor="subject">Subject</InputLabel>
                       <Select
                         value={this.state.selectedSubject}
@@ -137,11 +160,8 @@ class AddTutionClass extends Component {
                     </FormControl>
                   </div>
 
-                  <div style={{ width: "100%" }}>
-                    <FormControl
-                      style={{ width: "100% !important" }}
-                      variant="outlined"
-                    >
+                  <div className="grade-wrap">
+                    <FormControl className="grade-input" variant="outlined">
                       <InputLabel htmlFor="grade">Grade</InputLabel>
                       <Select
                         value={this.state.gradeToDisplay}
@@ -170,6 +190,7 @@ class AddTutionClass extends Component {
                       {this.state.selectedGrade.map((g, i, a) => {
                         return (
                           <Chip
+                            className="selected-grade"
                             key={i}
                             label={g}
                             onDelete={() => {
@@ -182,26 +203,27 @@ class AddTutionClass extends Component {
                     </div>
                   </div>
                 </div>
+
                 <div>
                   <FormControl variant="outlined">
-                    <InputLabel htmlFor="subject">Teacher</InputLabel>
+                    <InputLabel htmlFor="teacher">Teacher</InputLabel>
                     <Select
-                      value={this.state.selectedSubject}
+                      value={this.state.selectedTeacher}
                       onChange={event => {
-                        this.handleChange(event, "selectedSubject");
+                        this.handleTeacherSelect(event, "selectedTeacher");
                       }}
                       input={
                         <OutlinedInput
                           labelWidth={55}
-                          name="subject"
-                          id="subject"
+                          name="teacher"
+                          id="teacher"
                         />
                       }
                     >
-                      {this.state.subjects.map((s, i, a) => {
+                      {this.state.teachers.map((t, i, a) => {
                         return (
-                          <MenuItem key={i} value={s.id}>
-                            {s.name}
+                          <MenuItem key={i} value={t.id}>
+                            {t.firstName} {t.lastName}
                           </MenuItem>
                         );
                       })}
@@ -243,12 +265,43 @@ class AddTutionClass extends Component {
                     variant="outlined"
                   />
                 </div>
-                <div>
+                <div className="date-time-wrap">
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DateTimePicker
-                      value={this.state.selectedDate}
-                      onChange={this.handleDateChange}
-                    />
+                    <Grid container justify="space-around">
+                      <KeyboardDatePicker
+                        style={{ marginRight: "177px" }}
+                        margin="normal"
+                        id="date"
+                        label="Date"
+                        format="MM/dd/yyyy"
+                        value={this.state.selectedDate}
+                        onChange={this.handleDateChange}
+                        KeyboardButtonProps={{
+                          "aria-label": "change date"
+                        }}
+                      />
+                      <KeyboardTimePicker
+                        margin="normal"
+                        id="start-time"
+                        label="Start Time"
+                        value={this.state.selectedDate}
+                        onChange={this.handleDateChange}
+                        KeyboardButtonProps={{
+                          "aria-label": "change time"
+                        }}
+                      />
+
+                      <KeyboardTimePicker
+                        margin="normal"
+                        id="end-time"
+                        label="End Time"
+                        value={this.state.selectedEndTime}
+                        onChange={this.handleEndTimeChange}
+                        KeyboardButtonProps={{
+                          "aria-label": "change time"
+                        }}
+                      />
+                    </Grid>
                   </MuiPickersUtilsProvider>
                 </div>
               </div>

@@ -3,7 +3,8 @@ import ClassDashboard from "../components/ClassDashboard";
 import { getSubjectsAsync } from "../actions/subjectActions";
 import {
   getGradesAsync,
-  getTutionClassTypesAsync
+  getTutionClassTypesAsync,
+  getTeachersAsync
 } from "../actions/tutionClassActions";
 
 const mapStateToProps = state => ({
@@ -13,7 +14,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownprops) => ({
   fetchSubjects: () => dispatch(getSubjectsAsync()),
   fetchGrades: () => dispatch(getGradesAsync()),
-  fetchTutionClassTypes: () => dispatch(getTutionClassTypesAsync())
+  fetchTutionClassTypes: () => dispatch(getTutionClassTypesAsync()),
+  fetchTeachers: () => dispatch(getTeachersAsync())
 });
 
 export default connect(

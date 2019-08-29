@@ -13,9 +13,6 @@ const HeaderLogo = () => (
       <div className="header-logo">
         <img src="https://www.powerslaw.com/wp-content/uploads/2017/10/U.S.-Dept-Ed.jpg" />
       </div>
-      <div>
-        <HomeRoundedIcon style={{ color: "#000" }} />
-      </div>
     </div>
   </Link>
 );
@@ -34,6 +31,9 @@ class HeaderProfile extends Component {
   render() {
     return (
       <div className="header-profile">
+        <div className="home-icon-wrap">
+          <HomeRoundedIcon style={{ color: "#f8f9fa" }} />
+        </div>
         <div onClick={this.handleClick} className="user-wrap">
           <div className="user-image">
             <img src={this.props.image} />

@@ -1,17 +1,6 @@
 .add-tution-class-popup {
   position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: normal;
-}
-
-.add-tution-class-popup {
-  position: fixed;
-  top: 0px;
+  top: -70px;
   bottom: 0px;
   left: 0px;
   right: 0px;
@@ -72,4 +61,32 @@
 
 .MuiPickersModal-dialogRoot .MuiButtonBase-root {
   color: #000 !important;
+}
+
+.date-time-wrap .MuiGrid-justify-xs-space-around {
+  justify-content: flex-end;
+}
+
+.MuiCardHeader-root .MuiAvatar-root {
+  position: inherit !important;
+}
+
+.subject-grade-wrap .subject-wrap {
+  width: 100% !important;
+}
+
+.input-wrap .subject-grade-wrap {
+  display: flex;
+}
+
+.subject-wrap .subject-input {
+  min-width: 226px !important;
+}
+
+.grade-wrap .grade-input {
+  min-width: 226px !important;
+}
+
+.selected-grade {
+  margin: 5px;
 }
