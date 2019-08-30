@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999999;
 }
 
 .add-tution-class-form {
@@ -48,6 +49,9 @@
 .add-tution-class-popup .input-wrap {
   width: 100%;
   padding-bottom: 20px;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
 }
 
 .add-tution-class-popup .MuiFormControl-root {
@@ -71,14 +75,6 @@
   position: inherit !important;
 }
 
-.subject-grade-wrap .subject-wrap {
-  width: 100% !important;
-}
-
-.input-wrap .subject-grade-wrap {
-  display: flex;
-}
-
 .subject-wrap .subject-input {
   min-width: 226px !important;
 }
@@ -89,4 +85,20 @@
 
 .selected-grade {
   margin: 5px;
+}
+
+.input-wrap .col-1,
+.input-wrap .col-2 {
+  min-width: 50%;
+  max-width: 50%;
+  padding: 10px;
+  height: 100%;
+}
+
+.col-1 > div {
+  width: 100%;
+}
+
+.input-wrap .input {
+  width: 100%;
 }

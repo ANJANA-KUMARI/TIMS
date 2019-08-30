@@ -32,7 +32,9 @@ class HeaderProfile extends Component {
     return (
       <div className="header-profile">
         <div className="home-icon-wrap">
-          <HomeRoundedIcon style={{ color: "#f8f9fa" }} />
+          <Link to={ROUTE_PATHS.HOMEPAGE}>
+            <HomeRoundedIcon style={{ color: "#f8f9fa" }} />
+          </Link>
         </div>
         <div onClick={this.handleClick} className="user-wrap">
           <div className="user-image">
@@ -42,7 +44,7 @@ class HeaderProfile extends Component {
           <span>
             <img
               src="/image/down.png"
-              style={{ width: "15px", margin: "0px 10px" }}
+              style={{ width: "15px", margin: "5px 10px" }}
             />
           </span>
         </div>

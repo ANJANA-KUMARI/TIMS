@@ -10,17 +10,24 @@ import {
   FormControl,
   Select,
   InputLabel,
-  OutlinedInput
+  OutlinedInput,
+  Icon
 } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-  KeyboardDatePicker
+  KeyboardDatePicker,
+  TimePicker
 } from "@material-ui/pickers";
 import "date-fns";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
-import { Cancel, CheckCircle } from "@material-ui/icons";
+import {
+  Cancel,
+  CheckCircle,
+  TimeToLeaveRounded,
+  AccessTime
+} from "@material-ui/icons";
 import Chip from "@material-ui/core/Chip";
 import "./AddTutionClass.css";
 
@@ -132,9 +139,13 @@ class AddTutionClass extends Component {
             </IconButton>
             <CardContent>
               <div className="input-wrap">
-                <div className="subject-grade-wrap">
+                <div className="col-1">
+                  {/* Subject */}
                   <div className="subject-wrap">
-                    <FormControl className="subject-input" variant="outlined">
+                    <FormControl
+                      className="subject-input input"
+                      variant="outlined"
+                    >
                       <InputLabel htmlFor="subject">Subject</InputLabel>
                       <Select
                         value={this.state.selectedSubject}
@@ -160,8 +171,87 @@ class AddTutionClass extends Component {
                     </FormControl>
                   </div>
 
+                  {/* Teacher */}
+                  <div>
+                    <FormControl className="input" variant="outlined">
+                      <InputLabel htmlFor="teacher">Teacher</InputLabel>
+                      <Select
+                        value={this.state.selectedTeacher}
+                        onChange={event => {
+                          this.handleTeacherSelect(event, "selectedTeacher");
+                        }}
+                        input={
+                          <OutlinedInput
+                            labelWidth={55}
+                            name="teacher"
+                            id="teacher"
+                          />
+                        }
+                      >
+                        {this.state.teachers.map((t, i, a) => {
+                          return (
+                            <MenuItem key={i} value={t.id}>
+                              {t.firstName} {t.lastName}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  </div>
+
+                  {/* Class type */}
+                  <div>
+                    <FormControl className="input" variant="outlined">
+                      <InputLabel htmlFor="type">Type</InputLabel>
+                      <Select
+                        value={this.state.selectedType}
+                        onChange={event => {
+                          this.handleTutionClassTypeSelect(
+                            event,
+                            "selectedType"
+                          );
+                        }}
+                        input={
+                          <OutlinedInput
+                            labelWidth={35}
+                            name="type"
+                            id="type"
+                          />
+                        }
+                      >
+                        {this.state.types.map((t, i, a) => {
+                          return (
+                            <MenuItem key={i} value={t.id}>
+                              {t.type}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  </div>
+
+                  {/* Venue */}
+                  <div>
+                    <TextField
+                      id="outlined-subject-input"
+                      className="input"
+                      label="Venue"
+                      type="text"
+                      onInput={this.handleNameChange}
+                      name="subject_name"
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+
+                <div className="col-2">
+                  {/* Grade */}
                   <div className="grade-wrap">
-                    <FormControl className="grade-input" variant="outlined">
+                    <FormControl
+                      className="grade-input input"
+                      variant="outlined"
+                    >
                       <InputLabel htmlFor="grade">Grade</InputLabel>
                       <Select
                         value={this.state.gradeToDisplay}
@@ -186,7 +276,12 @@ class AddTutionClass extends Component {
                       </Select>
                     </FormControl>
 
-                    <div>
+                    <div
+                      style={{
+                        paddingBottom:
+                          this.state.selectedGrade.length > 0 ? "10px" : "0px"
+                      }}
+                    >
                       {this.state.selectedGrade.map((g, i, a) => {
                         return (
                           <Chip
@@ -202,74 +297,11 @@ class AddTutionClass extends Component {
                       })}
                     </div>
                   </div>
-                </div>
 
-                <div>
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="teacher">Teacher</InputLabel>
-                    <Select
-                      value={this.state.selectedTeacher}
-                      onChange={event => {
-                        this.handleTeacherSelect(event, "selectedTeacher");
-                      }}
-                      input={
-                        <OutlinedInput
-                          labelWidth={55}
-                          name="teacher"
-                          id="teacher"
-                        />
-                      }
-                    >
-                      {this.state.teachers.map((t, i, a) => {
-                        return (
-                          <MenuItem key={i} value={t.id}>
-                            {t.firstName} {t.lastName}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                </div>
-
-                <div>
-                  <FormControl variant="outlined">
-                    <InputLabel htmlFor="type">Type</InputLabel>
-                    <Select
-                      value={this.state.selectedType}
-                      onChange={event => {
-                        this.handleTutionClassTypeSelect(event, "selectedType");
-                      }}
-                      input={
-                        <OutlinedInput labelWidth={35} name="type" id="type" />
-                      }
-                    >
-                      {this.state.types.map((t, i, a) => {
-                        return (
-                          <MenuItem key={i} value={t.id}>
-                            {t.type}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                </div>
-
-                <div>
-                  <TextField
-                    id="outlined-subject-input"
-                    label="Venue"
-                    type="text"
-                    onInput={this.handleNameChange}
-                    name="subject_name"
-                    margin="normal"
-                    variant="outlined"
-                  />
-                </div>
-                <div className="date-time-wrap">
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid container justify="space-around">
                       <KeyboardDatePicker
-                        style={{ marginRight: "177px" }}
+                        className="input"
                         margin="normal"
                         id="date"
                         label="Date"
@@ -281,6 +313,7 @@ class AddTutionClass extends Component {
                         }}
                       />
                       <KeyboardTimePicker
+                        className="input"
                         margin="normal"
                         id="start-time"
                         label="Start Time"
@@ -289,9 +322,15 @@ class AddTutionClass extends Component {
                         KeyboardButtonProps={{
                           "aria-label": "change time"
                         }}
+                        keyboardIcon={
+                          <Icon>
+                            <AccessTime />
+                          </Icon>
+                        }
                       />
 
                       <KeyboardTimePicker
+                        className="input"
                         margin="normal"
                         id="end-time"
                         label="End Time"
@@ -300,6 +339,11 @@ class AddTutionClass extends Component {
                         KeyboardButtonProps={{
                           "aria-label": "change time"
                         }}
+                        keyboardIcon={
+                          <Icon>
+                            <AccessTime />
+                          </Icon>
+                        }
                       />
                     </Grid>
                   </MuiPickersUtilsProvider>

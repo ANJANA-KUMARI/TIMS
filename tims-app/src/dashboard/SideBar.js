@@ -14,43 +14,43 @@ class SideBar extends Component {
       id: 2,
       icon: "https://img.icons8.com/color/48/000000/attendance-mark.png",
       title: "Attendance",
-      url: "/attendance/"
+      url: ROUTE_PATHS.ATTENDENCE
     },
     {
       id: 3,
       icon: "https://img.icons8.com/ultraviolet/40/000000/students.png",
       title: "Students",
-      url: "/students/"
+      url: ROUTE_PATHS.STUDENTS
     },
     {
       id: 4,
       icon: "https://img.icons8.com/ultraviolet/40/000000/employee-card.png",
       title: "Employees",
-      url: "/employees/"
+      url: ROUTE_PATHS.EMPLOYEES
     },
     {
       id: 5,
       icon: "https://img.icons8.com/ultraviolet/40/000000/parent-guardian.png",
       title: "Parents",
-      url: "/parents  /"
+      url: ROUTE_PATHS.PARENTS
     },
     {
       id: 6,
       icon: "https://img.icons8.com/ultraviolet/40/000000/no-hidden-fee.png",
       title: "Fee",
-      url: "/fee/"
+      url: ROUTE_PATHS.FEE
     },
     {
       id: 7,
       icon: "https://img.icons8.com/ultraviolet/40/000000/planner.png",
       title: "TimeTable",
-      url: "/timetable/"
+      url: ROUTE_PATHS.TIMETABLE
     },
     {
       id: 8,
       icon: "https://img.icons8.com/ultraviolet/40/000000/saving-book.png",
       title: "Study Material",
-      url: "/study-material/"
+      url: ROUTE_PATHS.STUDY_MATERIAL
     }
   ];
   render() {
