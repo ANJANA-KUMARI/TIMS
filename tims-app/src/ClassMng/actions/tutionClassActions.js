@@ -3,7 +3,9 @@ import {
   getTutionClass,
   getGrades,
   getTutionClassTypes,
-  getTeachers
+  getTeachers,
+  deleteTutionClass,
+  updateTutionClass
 } from "../api/tutionClassApi";
 import { async } from "q";
 
@@ -61,7 +63,7 @@ export const addTutionClassAsync = tutionClass => {
   };
 };
 
-export const getTutionClasssAsync = () => {
+export const getTutionClassAsync = () => {
   return async function(dispatch, getState) {
     try {
       const tutionClass = await getTutionClass();
@@ -105,16 +107,26 @@ export const getTeachersAsync = () => {
   };
 };
 
-export const updatetutionClassAsync = () => {
+export const updatetutionClassAsync = tutionClass => {
   return async function(dispatch, getState) {
     try {
+      const updatedtutionClass = await updateTutionClass(tutionClass);
+      dispatch(tutionClassUpdated(updatedtutionClass.data));
     } catch (err) {}
   };
 };
 
-export const deletetutionClassAsync = () => {
+export const deletetutionClassAsync = tutionClassId => {
   return async function(dispatch, getState) {
     try {
-    } catch (err) {}
+      const result = await deleteTutionClass(tutionClassId);
+      if (result.data) {
+        dispatch(tutionClassDeleted(tutionClassId));
+      } else {
+        console.log("ERROR DELETING TUTION CLASS.");
+      }
+    } catch (err) {
+      console.log("ERROR DELETING TUTION CLASS.");
+    }
   };
 };

@@ -4,18 +4,21 @@ import { getSubjectsAsync } from "../actions/subjectActions";
 import {
   getGradesAsync,
   getTutionClassTypesAsync,
-  getTeachersAsync
+  getTeachersAsync,
+  getTutionClassAsync
 } from "../actions/tutionClassActions";
 
 const mapStateToProps = state => ({
-  subjectsCount: state.subjects.subjectList.length
+  subjectsCount: state.subjects.subjectList.length,
+  tutionClassesCount: state.tutionClass.tutionClassList.length
 });
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   fetchSubjects: () => dispatch(getSubjectsAsync()),
   fetchGrades: () => dispatch(getGradesAsync()),
   fetchTutionClassTypes: () => dispatch(getTutionClassTypesAsync()),
-  fetchTeachers: () => dispatch(getTeachersAsync())
+  fetchTeachers: () => dispatch(getTeachersAsync()),
+  fetchTutionClasses: () => dispatch(getTutionClassAsync())
 });
 
 export default connect(

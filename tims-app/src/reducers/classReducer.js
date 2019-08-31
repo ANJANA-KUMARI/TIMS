@@ -29,6 +29,32 @@ export const tutionClass = (state = defaultState, action) => {
         ...state,
         teacherList: action.payload
       };
+
+    case TutionClassActionTypes.DELETE_TUTION_CLASS:
+      const newTutionClassList = state.titionClassList.slice();
+      const indexToDelete = newTutionClassList.findIndex(
+        c => c.id === action.payload
+      );
+      newTutionClassList.splice(indexToDelete, 1);
+      return {
+        tutionClassList: [...newTutionClassList]
+      };
+
+    case TutionClassActionTypes.UPDATE_TUTION_CLASS:
+      const newUpdatedTutionClassList = state.TutionClassList.slice();
+      const indexToUpdate = newUpdatedTutionClassList.findIndex(
+        c => c.id === action.payload.id
+      );
+      newUpdatedTutionClassList[indexToUpdate] = action.payload;
+      return {
+        tutionClassList: [...newUpdatedTutionClassList]
+      };
+
+    case TutionClassActionTypes.TUTION_CLASS_LOADED:
+      return {
+        tutionClassList: [...action.payload]
+      };
+
     default:
       return state;
   }

@@ -7,13 +7,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .add-tution-class-form {
   width: 50%;
   height: 70%;
-  z-index: 99999;
+  /* z-index: 999999; */
 }
 
 .add-tution-class-backdrop {
@@ -101,4 +101,9 @@
 
 .input-wrap .input {
   width: 100%;
+}
+
+.tution-class-cards {
+  margin-right: 20px;
+  margin-bottom: 20px;
 }

@@ -3,7 +3,6 @@ import SideBar from "./SideBar";
 import Header from "./Header";
 import HomePage from "./HomePage";
 import ClassDashboard from "../ClassMng/containers/ClassDashboardContainer";
-import ClassesPage from "../ClassMng/components/tutionClass/ClassesPage";
 import SubjectsPage from "../ClassMng/containers/SubjectsPage";
 import { Route } from "react-router-dom";
 import { ROUTE_PATHS, ROUTE_DASHBOARD_TITLES } from "../Constants";
@@ -46,7 +45,7 @@ class Dashboard extends Component {
               path={ROUTE_PATHS.CLASS_DASHBOARD}
               component={ClassDashboard}
             />
-            <Route path={ROUTE_PATHS.TUTION_CLASS} component={ClassesPage} />
+            {/* <Route path={ROUTE_PATHS.TUTION_CLASS} component={ClassesPage} /> */}
             <Route path={ROUTE_PATHS.SUBJECTS} component={SubjectsPage} />
             {/* <Route path="/" component={HomePage} /> */}
           </div>

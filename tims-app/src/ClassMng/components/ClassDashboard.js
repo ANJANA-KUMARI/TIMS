@@ -12,7 +12,8 @@ class ClassDashboard extends Component {
   state = {
     showAddSubjectForm: false,
     showAddTutionClassForm: false,
-    subjectsCount: this.props.subjectsCount
+    subjectsCount: this.props.subjectsCount,
+    tutionClassesCount: this.props.tutionClassesCount
   };
 
   constructor(props) {
@@ -78,7 +79,7 @@ class ClassDashboard extends Component {
                 </Avatar>
               }
               title="Classes"
-              subheader="10"
+              subheader={this.state.tutionClassesCount}
             />
           </Link>
         </Card>

@@ -1,6 +1,9 @@
 import { connect } from "react-redux";
 import AddTutionClassComponent from "../components/tutionClass/AddTutionClass";
-import { addTutionClassAsync } from "../actions/tutionClassActions";
+import {
+  addTutionClassAsync,
+  updatetutionClassAsync
+} from "../actions/tutionClassActions";
 
 const mapStateToProps = state => ({
   subjectList: state.subjects.subjectList,
@@ -11,6 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   onCreate: tutionClass => dispatch(addTutionClassAsync(tutionClass)),
+  onUpdate: tutionClass => dispatch(updatetutionClassAsync(tutionClass)),
   onClose: () => ownprops.onCancelPopup()
 });
 

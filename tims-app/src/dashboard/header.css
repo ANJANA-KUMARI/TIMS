@@ -1,6 +1,6 @@
 .header-profile {
   position: relative;
-  z-index: 99999;
+  z-index: 99;
 }
 
 .header-profile .user-wrap {
