@@ -22,12 +22,7 @@ import {
 import "date-fns";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
-import {
-  Cancel,
-  CheckCircle,
-  TimeToLeaveRounded,
-  AccessTime
-} from "@material-ui/icons";
+import { Cancel, CheckCircle, AccessTime } from "@material-ui/icons";
 import Chip from "@material-ui/core/Chip";
 import "./AddTutionClass.css";
 
@@ -37,14 +32,15 @@ class AddTutionClass extends Component {
     grades: this.props.gradeList,
     teachers: this.props.teacherList,
     types: this.props.tutionClassTypeList,
-    datetime: new Date(),
+    currentTutionClassList: this.props.currentTutionClassList,
+    date: new Date(),
+    startTime: new Date(),
+    endTime: new Date(),
     venue: "",
     selectedSubject: -1,
     selectedGrade: [],
     selectedTeacher: -1,
     selectedType: -1,
-    selectedDate: new Date(),
-    selectedEndTime: new Date(),
     gradeToDisplay: -1,
     nameErrorMsg: ""
   };
@@ -55,9 +51,27 @@ class AddTutionClass extends Component {
     });
   };
 
+  handleStartTimeChange = date => {
+    this.setState({
+      startTime: date
+    });
+  };
+
   handleEndTimeChange = date => {
     this.setState({
-      selectedEndTime: date
+      endTime: date
+    });
+  };
+
+  handleDateChange = date => {
+    this.setState({
+      date: date
+    });
+  };
+
+  handleVenueChange = event => {
+    this.setState({
+      venue: event.target.value
     });
   };
 
@@ -67,8 +81,10 @@ class AddTutionClass extends Component {
       grades: this.state.selectedGrade,
       teacher: this.state.selectedTeacher,
       type: this.state.selectedType,
-      datetime: this.state.datetime,
-      venue: this.state.venue
+      date: this.state.date,
+      venue: this.state.venue,
+      startTime: this.state.startTime,
+      endTime: this.state.endTime
     };
     this.props.onCreate(tutionClass);
     this.handleOnClickCancel();
@@ -78,9 +94,15 @@ class AddTutionClass extends Component {
     this.props.onClose();
   };
 
-  handleChange = (event, changedName) => {
+  // handleChange = (event, changedName) => {
+  //   this.setState({
+  //     [changedName]: event.target.value
+  //   });
+  // };
+
+  handleSubjectSelect = event => {
     this.setState({
-      [changedName]: event.target.value
+      selectedSubject: event.target.value
     });
   };
 
@@ -150,7 +172,7 @@ class AddTutionClass extends Component {
                       <Select
                         value={this.state.selectedSubject}
                         onChange={event => {
-                          this.handleChange(event, "selectedSubject");
+                          this.handleSubjectSelect(event);
                         }}
                         input={
                           <OutlinedInput
@@ -178,7 +200,7 @@ class AddTutionClass extends Component {
                       <Select
                         value={this.state.selectedTeacher}
                         onChange={event => {
-                          this.handleTeacherSelect(event, "selectedTeacher");
+                          this.handleTeacherSelect(event);
                         }}
                         input={
                           <OutlinedInput
@@ -206,10 +228,7 @@ class AddTutionClass extends Component {
                       <Select
                         value={this.state.selectedType}
                         onChange={event => {
-                          this.handleTutionClassTypeSelect(
-                            event,
-                            "selectedType"
-                          );
+                          this.handleTutionClassTypeSelect(event);
                         }}
                         input={
                           <OutlinedInput
@@ -237,7 +256,7 @@ class AddTutionClass extends Component {
                       className="input"
                       label="Venue"
                       type="text"
-                      onInput={this.handleNameChange}
+                      onInput={this.handleVenueChange}
                       name="subject_name"
                       margin="normal"
                       variant="outlined"
@@ -306,7 +325,7 @@ class AddTutionClass extends Component {
                         id="date"
                         label="Date"
                         format="MM/dd/yyyy"
-                        value={this.state.selectedDate}
+                        value={this.state.date}
                         onChange={this.handleDateChange}
                         KeyboardButtonProps={{
                           "aria-label": "change date"
@@ -317,8 +336,8 @@ class AddTutionClass extends Component {
                         margin="normal"
                         id="start-time"
                         label="Start Time"
-                        value={this.state.selectedDate}
-                        onChange={this.handleDateChange}
+                        value={this.state.startTime}
+                        onChange={this.handleStartTimeChange}
                         KeyboardButtonProps={{
                           "aria-label": "change time"
                         }}
@@ -334,7 +353,7 @@ class AddTutionClass extends Component {
                         margin="normal"
                         id="end-time"
                         label="End Time"
-                        value={this.state.selectedEndTime}
+                        value={this.state.endTime}
                         onChange={this.handleEndTimeChange}
                         KeyboardButtonProps={{
                           "aria-label": "change time"
