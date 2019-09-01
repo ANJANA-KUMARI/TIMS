@@ -6,17 +6,17 @@ import {
   getTeachers,
   deleteTutionClass,
   updateTutionClass
-} from "../api/tutionClassApi";
-import { async } from "q";
+} from '../api/tutionClassApi';
+import { async } from 'q';
 
 export const TutionClassActionTypes = {
-  ADD_TUTION_CLASS: "ADD_TUTION_CLASS",
-  UPDATE_TUTION_CLASS: "UPDATE_TUTION_CLASS",
-  DELETE_TUTION_CLASS: "DELETE_TUTION_CLASS",
-  GRADES_LOADED: "GRADES_LOADED",
-  TYPES_LOADED: "TYPES_LOADED",
-  TUTION_CLASS_LOADED: "TUTION_CLASS_LOADED",
-  TEACHERS_LOADED: "TEACHERS_LOADED"
+  ADD_TUTION_CLASS: 'ADD_TUTION_CLASS',
+  UPDATE_TUTION_CLASS: 'UPDATE_TUTION_CLASS',
+  DELETE_TUTION_CLASS: 'DELETE_TUTION_CLASS',
+  GRADES_LOADED: 'GRADES_LOADED',
+  TYPES_LOADED: 'TYPES_LOADED',
+  TUTION_CLASS_LOADED: 'TUTION_CLASS_LOADED',
+  TEACHERS_LOADED: 'TEACHERS_LOADED'
 };
 
 // action creators
@@ -24,6 +24,11 @@ export const TutionClassActionTypes = {
 const tutionClassAdded = tutionClass => ({
   type: TutionClassActionTypes.ADD_TUTION_CLASS,
   payload: tutionClass
+});
+
+const tutionClassLoaded = tutionClasses => ({
+  type: TutionClassActionTypes.TUTION_CLASS_LOADED,
+  payload: tutionClasses
 });
 
 const tutionClassUpdated = updatedtutionClass => ({
@@ -66,8 +71,8 @@ export const addTutionClassAsync = tutionClass => {
 export const getTutionClassAsync = () => {
   return async function(dispatch, getState) {
     try {
-      const tutionClass = await getTutionClass();
-      dispatch(tutionClassAdded(tutionClass.data));
+      const tutionClassList = await getTutionClass();
+      dispatch(tutionClassLoaded(tutionClassList.data));
     } catch (err) {
       // TODO : error
     }
@@ -123,10 +128,10 @@ export const deletetutionClassAsync = tutionClassId => {
       if (result.data) {
         dispatch(tutionClassDeleted(tutionClassId));
       } else {
-        console.log("ERROR DELETING TUTION CLASS.");
+        console.log('ERROR DELETING TUTION CLASS.');
       }
     } catch (err) {
-      console.log("ERROR DELETING TUTION CLASS.");
+      console.log('ERROR DELETING TUTION CLASS.');
     }
   };
 };

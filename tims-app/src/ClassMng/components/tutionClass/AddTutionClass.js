@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Card,
   CardActions,
@@ -12,19 +12,19 @@ import {
   InputLabel,
   OutlinedInput,
   Icon
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
   TimePicker
-} from "@material-ui/pickers";
-import "date-fns";
-import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
-import { Cancel, CheckCircle, AccessTime } from "@material-ui/icons";
-import Chip from "@material-ui/core/Chip";
-import "./AddTutionClass.css";
+} from '@material-ui/pickers';
+import 'date-fns';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import { Cancel, CheckCircle, AccessTime } from '@material-ui/icons';
+import Chip from '@material-ui/core/Chip';
+import './AddTutionClass.css';
 
 class AddTutionClass extends Component {
   state = {
@@ -36,13 +36,13 @@ class AddTutionClass extends Component {
     date: new Date(),
     startTime: new Date(),
     endTime: new Date(),
-    venue: "",
+    venue: '',
     selectedSubject: -1,
     selectedGrade: [],
     selectedTeacher: -1,
     selectedType: -1,
     gradeToDisplay: -1,
-    nameErrorMsg: ""
+    nameErrorMsg: ''
   };
 
   handleDateChange = date => {
@@ -298,7 +298,7 @@ class AddTutionClass extends Component {
                     <div
                       style={{
                         paddingBottom:
-                          this.state.selectedGrade.length > 0 ? "10px" : "0px"
+                          this.state.selectedGrade.length > 0 ? '10px' : '0px'
                       }}
                     >
                       {this.state.selectedGrade.map((g, i, a) => {
@@ -328,7 +328,7 @@ class AddTutionClass extends Component {
                         value={this.state.date}
                         onChange={this.handleDateChange}
                         KeyboardButtonProps={{
-                          "aria-label": "change date"
+                          'aria-label': 'change date'
                         }}
                       />
                       <KeyboardTimePicker
@@ -339,7 +339,7 @@ class AddTutionClass extends Component {
                         value={this.state.startTime}
                         onChange={this.handleStartTimeChange}
                         KeyboardButtonProps={{
-                          "aria-label": "change time"
+                          'aria-label': 'change time'
                         }}
                         keyboardIcon={
                           <Icon>
@@ -356,7 +356,7 @@ class AddTutionClass extends Component {
                         value={this.state.endTime}
                         onChange={this.handleEndTimeChange}
                         KeyboardButtonProps={{
-                          "aria-label": "change time"
+                          'aria-label': 'change time'
                         }}
                         keyboardIcon={
                           <Icon>

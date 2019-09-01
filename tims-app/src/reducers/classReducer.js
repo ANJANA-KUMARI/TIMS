@@ -1,4 +1,4 @@
-import { TutionClassActionTypes } from "../ClassMng/actions/tutionClassActions";
+import { TutionClassActionTypes } from '../ClassMng/actions/tutionClassActions';
 
 const defaultState = {
   tutionClassList: [],
@@ -37,6 +37,7 @@ export const tutionClass = (state = defaultState, action) => {
       );
       newTutionClassList.splice(indexToDelete, 1);
       return {
+        ...state,
         tutionClassList: [...newTutionClassList]
       };
 
@@ -47,12 +48,14 @@ export const tutionClass = (state = defaultState, action) => {
       );
       newUpdatedTutionClassList[indexToUpdate] = action.payload;
       return {
+        ...state,
         tutionClassList: [...newUpdatedTutionClassList]
       };
 
     case TutionClassActionTypes.TUTION_CLASS_LOADED:
       return {
-        tutionClassList: [...action.payload]
+        ...state,
+        tutionClassList: action.payload
       };
 
     default:
