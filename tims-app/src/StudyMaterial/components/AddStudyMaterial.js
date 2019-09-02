@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Card,
   CardActions,
@@ -12,16 +12,16 @@ import {
   InputLabel,
   OutlinedInput,
   Icon
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import { Cancel, CheckCircle, AccessTime } from '@material-ui/icons';
-import bsCustomFileInput from 'bs-custom-file-input';
+import { Cancel, CheckCircle, AccessTime } from "@material-ui/icons";
+import bsCustomFileInput from "bs-custom-file-input";
 
 class AddTutionClass extends Component {
   state = {
     tutionClasses: this.props.tutionClasses,
     selectedTutionClass: -1,
-    description: '',
+    description: "",
     file: null
   };
 
@@ -35,9 +35,9 @@ class AddTutionClass extends Component {
 
   handleOnClickCreate = () => {
     const studyMat = new FormData();
-    studyMat.append('tutionClassId', this.state.selectedTutionClass);
-    studyMat.append('description', this.state.description);
-    studyMat.append('studymatfile', this.state.file);
+    studyMat.append("tutionClassId", this.state.selectedTutionClass);
+    studyMat.append("description", this.state.description);
+    studyMat.append("studymatfile", this.state.file);
 
     this.props.onCreate(studyMat);
 
@@ -70,7 +70,7 @@ class AddTutionClass extends Component {
     return (
       <div className="add-tution-class-popup">
         <div className="add-tution-class-backdrop" />
-        <div className="add-tution-class-form" style={{ width: '400px' }}>
+        <div className="add-tution-class-form" style={{ width: "400px" }}>
           <Card className="popup-card">
             <CardHeader title="Add new study material" />
             <IconButton
@@ -81,12 +81,12 @@ class AddTutionClass extends Component {
               <Cancel />
             </IconButton>
             <CardContent>
-              <div style={{ marginBottom: '10px', marginRight: '30px' }}>
+              <div style={{ marginBottom: "10px", marginRight: "30px" }}>
                 <div className="tution-class-wrap">
                   <FormControl
                     className="tution-class"
                     variant="outlined"
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                   >
                     <InputLabel htmlFor="tutionclass">Tution class</InputLabel>
                     <Select
@@ -105,14 +105,14 @@ class AddTutionClass extends Component {
                       {this.state.tutionClasses.map((t, i, a) => {
                         return (
                           <MenuItem key={i} value={t.id}>
-                            Grade{' '}
+                            Grade{" "}
                             {t.grades.map((g, j, b) => {
                               if (j > 0) {
                                 return `,${g.val}`;
                               } else {
                                 return g.val;
                               }
-                            })}{' '}
+                            })}{" "}
                             {t.subject.name}
                           </MenuItem>
                         );
@@ -132,7 +132,7 @@ class AddTutionClass extends Component {
                     name="description"
                     margin="normal"
                     variant="outlined"
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                   />
                 </div>
 
