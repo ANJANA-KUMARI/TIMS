@@ -52,8 +52,8 @@ class HeaderProfile extends Component {
         <div
           className={
             this.state.isMenuOpened
-              ? "shadow user-menu menu-opened "
-              : "shadow user-menu "
+              ? "shadow user-menu menu-opened"
+              : "shadow user-menu"
           }
         >
           <MenuList>
@@ -72,12 +72,12 @@ class Header extends Component {
     {
       image:
         "https://banner2.kisspng.com/20180630/ltq/kisspng-computer-icons-user-avatar-clip-art-skincare-cartoon-5b371025a6d8a7.5354815915303352696834.jpg",
-      name: "Yalu"
+      name: "Lakmal"
     },
     {
       image:
         "https://cdn.imgbin.com/15/3/18/imgbin-computer-icons-woman-avatar-avatar-girl-TBWeJMyXNwtNQA661FQ0rZSv2.jpg",
-      name: "Malu"
+      name: "Anjana"
     }
   ];
 

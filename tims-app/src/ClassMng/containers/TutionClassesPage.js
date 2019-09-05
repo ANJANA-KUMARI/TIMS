@@ -1,6 +1,9 @@
 import { connect } from "react-redux";
 import { TutionClassList } from "../components/tutionClass/TutionClassList";
-import { deleteTutionClassAsync } from "../actions/tutionClassActions";
+import {
+  deletetutionClassAsync,
+  getTutionClassAsync
+} from "../actions/tutionClassActions";
 
 const mapStateToProps = state => ({
   tutionClasses: state.tutionClass.tutionClassList
@@ -8,7 +11,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   onDeleteTutionClass: tutionClassId =>
-    dispatch(deleteTutionClassAsync(tutionClassId))
+    dispatch(deletetutionClassAsync(tutionClassId)),
+  fetchTutionClasses: () => dispatch(getTutionClassAsync())
 });
 
 export default connect(

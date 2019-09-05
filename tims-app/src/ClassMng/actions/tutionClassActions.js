@@ -6,17 +6,17 @@ import {
   getTeachers,
   deleteTutionClass,
   updateTutionClass
-} from '../api/tutionClassApi';
-import { async } from 'q';
+} from "../api/tutionClassApi";
+import { async } from "q";
 
 export const TutionClassActionTypes = {
-  ADD_TUTION_CLASS: 'ADD_TUTION_CLASS',
-  UPDATE_TUTION_CLASS: 'UPDATE_TUTION_CLASS',
-  DELETE_TUTION_CLASS: 'DELETE_TUTION_CLASS',
-  GRADES_LOADED: 'GRADES_LOADED',
-  TYPES_LOADED: 'TYPES_LOADED',
-  TUTION_CLASS_LOADED: 'TUTION_CLASS_LOADED',
-  TEACHERS_LOADED: 'TEACHERS_LOADED'
+  ADD_TUTION_CLASS: "ADD_TUTION_CLASS",
+  UPDATE_TUTION_CLASS: "UPDATE_TUTION_CLASS",
+  DELETE_TUTION_CLASS: "DELETE_TUTION_CLASS",
+  GRADES_LOADED: "GRADES_LOADED",
+  TYPES_LOADED: "TYPES_LOADED",
+  TUTION_CLASS_LOADED: "TUTION_CLASS_LOADED",
+  TEACHERS_LOADED: "TEACHERS_LOADED"
 };
 
 // action creators
@@ -125,13 +125,16 @@ export const deletetutionClassAsync = tutionClassId => {
   return async function(dispatch, getState) {
     try {
       const result = await deleteTutionClass(tutionClassId);
-      if (result.data) {
+      if (result.data.deleted) {
+        console.log("====================================");
+        console.log(result);
+        console.log("====================================");
         dispatch(tutionClassDeleted(tutionClassId));
       } else {
-        console.log('ERROR DELETING TUTION CLASS.');
+        console.log("ERROR DELETING TUTION CLASS. 1");
       }
     } catch (err) {
-      console.log('ERROR DELETING TUTION CLASS.');
+      console.log("ERROR DELETING TUTION CLASS.");
     }
   };
 };

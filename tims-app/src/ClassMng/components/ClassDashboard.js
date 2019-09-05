@@ -25,6 +25,7 @@ class ClassDashboard extends Component {
     this.props.fetchGrades();
     this.props.fetchTutionClassTypes();
     this.props.fetchTeachers();
+    this.props.fetchTutionClasses();
   }
 
   componentDidUpdate(prevProp) {
@@ -33,6 +34,12 @@ class ClassDashboard extends Component {
         subjectsCount: this.props.subjectsCount
       });
     }
+  }
+
+  componentWillReceiveProps(nextProp) {
+    this.setState({
+      tutionClassesCount: nextProp.tutionClassesCount
+    });
   }
 
   toggleAddSubjectForm = () => {

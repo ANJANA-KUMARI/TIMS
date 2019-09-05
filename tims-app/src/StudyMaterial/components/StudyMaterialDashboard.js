@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import {
   Card,
@@ -6,23 +6,23 @@ import {
   CardContent,
   Icon,
   IconButton
-} from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
-import Avatar from '@material-ui/core/Avatar';
-import { Link } from 'react-router-dom';
-import { ROUTE_PATHS, API_PATH } from '../../Constants';
+import Avatar from "@material-ui/core/Avatar";
+import { Link } from "react-router-dom";
+import { ROUTE_PATHS, API_PATH } from "../../Constants";
 
-import '../studyMaterials.css';
+import "../studyMaterials.css";
 import {
   NoteAdd,
   CloudDownloadRounded,
   DeleteRounded,
   EditRounded,
   Description
-} from '@material-ui/icons';
+} from "@material-ui/icons";
 
-import AddStudyMaterialForm from '../containers/AddStudyMaterialForm';
+import AddStudyMaterialForm from "../containers/AddStudyMaterialForm";
 
 class StudyMaterialDashboard extends Component {
   constructor(props) {
@@ -36,10 +36,6 @@ class StudyMaterialDashboard extends Component {
   componentDidMount() {
     this.props.fetchStudyMaterials();
     this.props.fetchTutionClasses();
-
-    console.log('====================================');
-    console.log(this.state);
-    console.log('====================================');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,11 +75,11 @@ class StudyMaterialDashboard extends Component {
                       className="round"
                       style={{
                         backgroundColor: studyMat.tutionClass.subject.color,
-                        width: '20px',
-                        height: '20px'
+                        width: "20px",
+                        height: "20px"
                       }}
                     ></div>
-                    <span style={{ marginLeft: '10px', fontSize: '12px' }}>
+                    <span style={{ marginLeft: "10px", fontSize: "12px" }}>
                       {studyMat.tutionClass.subject.name}
                     </span>
                   </div>
@@ -105,7 +101,7 @@ class StudyMaterialDashboard extends Component {
                     <IconButton
                       aria-label="delete"
                       onClick={() => {
-                        if (window.confirm('Delete this subject material? ')) {
+                        if (window.confirm("Delete this subject material? ")) {
                           this.props.deleteStudyMaterial(studyMat.id);
                         }
                       }}
