@@ -1,16 +1,10 @@
-import { connect } from 'react-redux';
-import studyMatDashboard from '../components/StudyMaterialDashboard';
+import { connect } from "react-redux";
+import studyMatDashboard from "../components/StudyMaterialDashboard";
 import {
   getStudyMaterialsAsync,
   deleteStudyMaterialAsync
-} from '../actions/studyMaterialActions';
-import { getSubjectsAsync } from '../../ClassMng/actions/subjectActions';
-import {
-  getGradesAsync,
-  getTeachersAsync,
-  getTutionClassAsync,
-  getTutionClassTypesAsync
-} from '../../ClassMng/actions/tutionClassActions';
+} from "../actions/studyMaterialActions";
+import { getTutionClassAsync } from "../../ClassMng/actions/tutionClassActions";
 
 const mapStateToProps = state => ({
   studyMaterials: state.studyMaterials.studyMaterialList

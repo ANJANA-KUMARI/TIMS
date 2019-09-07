@@ -126,9 +126,6 @@ export const deletetutionClassAsync = tutionClassId => {
     try {
       const result = await deleteTutionClass(tutionClassId);
       if (result.data.deleted) {
-        console.log("====================================");
-        console.log(result);
-        console.log("====================================");
         dispatch(tutionClassDeleted(tutionClassId));
       } else {
         console.log("ERROR DELETING TUTION CLASS. 1");

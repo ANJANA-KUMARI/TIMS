@@ -32,9 +32,6 @@ export const subjects = (state = defaultState, action) => {
         s => s.id === action.payload.id
       );
       newUpdatedSubjectList[indexToUpdate] = action.payload;
-      // console.log("====================================");
-      // console.log("updated state", newUpdatedSubjectList);
-      // console.log("====================================");
       return {
         subjectList: [...newUpdatedSubjectList]
       };

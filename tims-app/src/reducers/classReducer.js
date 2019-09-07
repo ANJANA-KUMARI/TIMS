@@ -49,7 +49,7 @@ export const tutionClass = (state = defaultState, action) => {
       newUpdatedTutionClassList[indexToUpdate] = action.payload;
       return {
         ...state,
-        tutionClassList: [...newUpdatedTutionClassList]
+        tutionClassList: newUpdatedTutionClassList
       };
 
     case TutionClassActionTypes.TUTION_CLASS_LOADED:

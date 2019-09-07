@@ -48,20 +48,38 @@ class AddTutionClass extends Component {
     selectedType: -1,
     gradeToDisplay: -1,
     nameErrorMsg: "",
-    mode: this.props.mode
+    mode: this.props.mode,
+    titleToUpdate: "Update the Class",
+    titleToAdd: "Add a Class"
   };
 
-  componentDidMount() {
-    if (this.state.mode === ADD_TUTIONCLASS_POPUP_MODE.UPDATE) {
-      this.setState({});
-    }
+  constructor(props) {
+    super(props);
+    console.log("====================================");
+    console.log(props);
+    console.log("====================================");
   }
 
-  handleDateChange = date => {
-    this.setState({
-      selectedDate: date
-    });
-  };
+  componentDidMount() {
+    console.log("====================================");
+    console.log("class to update", this.props.tutionClassToUpdate);
+    console.log("====================================");
+    if (this.state.mode === ADD_TUTIONCLASS_POPUP_MODE.UPDATE) {
+      this.setState({
+        selectedSubject: this.props.tutionClassToUpdate.subject.id,
+        selectedGrade: this.props.tutionClassToUpdate.grades.map(g => g.val),
+        selectedTeacher: this.props.tutionClassToUpdate.teacher.id,
+        selectedType: this.props.tutionClassToUpdate.type.id,
+        date: this.props.tutionClassToUpdate.date,
+        venue: this.props.tutionClassToUpdate.venue,
+        startTime: this.props.tutionClassToUpdate.startTime,
+        endTime: this.props.tutionClassToUpdate.endTime
+      });
+    }
+    console.log("====================================");
+    console.log(this.state.grades);
+    console.log("====================================");
+  }
 
   handleStartTimeChange = date => {
     this.setState({
@@ -88,17 +106,33 @@ class AddTutionClass extends Component {
   };
 
   handleOnClickCreate = () => {
-    const tutionClass = {
-      subject: this.state.selectedSubject,
-      grades: this.state.selectedGrade,
-      teacher: this.state.selectedTeacher,
-      type: this.state.selectedType,
-      date: this.state.date,
-      venue: this.state.venue,
-      startTime: this.state.startTime,
-      endTime: this.state.endTime
-    };
-    this.props.onCreate(tutionClass);
+    if (this.state.mode === ADD_TUTIONCLASS_POPUP_MODE.UPDATE) {
+      const updatedTutionClass = {
+        id: this.props.tutionClassToUpdate.id,
+        subject: this.state.selectedSubject,
+        grades: this.state.selectedGrade,
+        teacher: this.state.selectedTeacher,
+        type: this.state.selectedType,
+        date: this.state.date,
+        venue: this.state.venue,
+        startTime: this.state.startTime,
+        endTime: this.state.endTime
+      };
+      this.props.onUpdate(updatedTutionClass);
+    } else {
+      const tutionClass = {
+        subject: this.state.selectedSubject,
+        grades: this.state.selectedGrade,
+        teacher: this.state.selectedTeacher,
+        type: this.state.selectedType,
+        date: this.state.date,
+        venue: this.state.venue,
+        startTime: this.state.startTime,
+        endTime: this.state.endTime
+      };
+      this.props.onCreate(tutionClass);
+    }
+
     this.handleOnClickCancel();
   };
 
@@ -163,7 +197,13 @@ class AddTutionClass extends Component {
         <div className="add-tution-class-backdrop" />
         <div className="add-tution-class-form">
           <Card className="popup-card">
-            <CardHeader title="Add new class" />
+            <CardHeader
+              title={
+                this.state.mode === ADD_TUTIONCLASS_POPUP_MODE.UPDATE
+                  ? this.state.titleToUpdate
+                  : this.state.titleToAdd
+              }
+            />
             <IconButton
               className="popup-cancel-btn"
               aria-label="cancel"
@@ -268,6 +308,7 @@ class AddTutionClass extends Component {
                       className="input"
                       label="Venue"
                       type="text"
+                      value={this.state.venue}
                       onInput={this.handleVenueChange}
                       name="subject_name"
                       margin="normal"
