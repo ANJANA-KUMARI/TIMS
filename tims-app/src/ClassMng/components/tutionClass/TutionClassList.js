@@ -1,13 +1,11 @@
-import React, { Component } from "react";
-import TutionClass from "./TutionClass";
-import AddTutionClassForm from "../../containers/AddTutionClassForm";
-import { ADD_TUTIONCLASS_POPUP_MODE } from "./AddTutionClass";
+import React, { Component } from 'react';
+import TutionClass from './TutionClass';
+import AddTutionClassForm from '../../containers/AddTutionClassForm';
+import { ADD_TUTIONCLASS_POPUP_MODE } from './AddTutionClass';
 
 export class TutionClassList extends Component {
   constructor(props) {
     super(props);
-    // this.props.fetchTutionClasses();
-    // CHECK MALU: updated prop name, it was fetchTutionClasses malu
     this.props.fetchData();
   }
 
@@ -38,7 +36,7 @@ export class TutionClassList extends Component {
 
   render() {
     return (
-      <div style={{ display: "flex", padding: "20px", flexWrap: "wrap" }}>
+      <div style={{ display: 'flex', padding: '20px', flexWrap: 'wrap' }}>
         {this.state.tutionClasses.map((t, i, a) => (
           <TutionClass
             tutionClass={t}

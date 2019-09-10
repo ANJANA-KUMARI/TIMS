@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Card,
   CardActions,
@@ -7,28 +7,28 @@ import {
   IconButton,
   TextField,
   MenuItem
-} from "@material-ui/core";
-import { Cancel, CheckCircle } from "@material-ui/icons";
-import "./AddSubject.css";
-import { SketchPicker } from "react-color";
-import reactCSS from "reactcss";
+} from '@material-ui/core';
+import { Cancel, CheckCircle } from '@material-ui/icons';
+import './AddSubject.css';
+import { SketchPicker } from 'react-color';
+import reactCSS from 'reactcss';
 
 export const ADD_SUBJECT_POPUP_MODE = {
-  INSERT: "INSERT",
-  UPDATE: "UPDATE"
+  INSERT: 'INSERT',
+  UPDATE: 'UPDATE'
 };
 
 class AddSubject extends Component {
   state = {
     displayColorPicker: false,
-    colorHex: "",
-    name: "",
+    colorHex: '',
+    name: '',
     currentSubjectList: this.props.currentSubjectList,
-    colorErrorMsg: "",
-    nameErrorMsg: "",
+    colorErrorMsg: '',
+    nameErrorMsg: '',
     mode: this.props.mode,
-    titleToUpdate: "Update the Subject",
-    titleToAdd: "Add a Subject"
+    titleToUpdate: 'Update the Subject',
+    titleToAdd: 'Add a Subject'
   };
 
   componentDidMount() {
@@ -77,13 +77,13 @@ class AddSubject extends Component {
     if (usedColorList.length !== 0) {
       this.setState({
         colorErrorMsg:
-          "Selected Color is already used. Please select another color!",
+          'Selected Color is already used. Please select another color!',
         displayColorPicker: false
       });
     } else {
       this.setState({
         colorHex: color.hex,
-        colorErrorMsg: ""
+        colorErrorMsg: ''
       });
     }
   };
@@ -95,12 +95,12 @@ class AddSubject extends Component {
     if (currentSubjects.length !== 0) {
       this.setState({
         nameErrorMsg:
-          "Entered Subject is already used. Please enter another Subject!"
+          'Entered Subject is already used. Please enter another Subject!'
       });
     } else {
       this.setState({
         name: event.target.value,
-        nameErrorMsg: ""
+        nameErrorMsg: ''
       });
     }
   };
@@ -109,31 +109,31 @@ class AddSubject extends Component {
     const styles = reactCSS({
       default: {
         color: {
-          width: "36px",
-          height: "14px",
-          borderRadius: "2px",
+          width: '36px',
+          height: '14px',
+          borderRadius: '2px',
           background: this.state.colorHex
         },
         swatch: {
-          padding: "5px",
-          background: "#fff",
-          borderRadius: "1px",
-          boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
-          display: "inline-block",
-          cursor: "pointer"
+          padding: '5px',
+          background: '#fff',
+          borderRadius: '1px',
+          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+          display: 'inline-block',
+          cursor: 'pointer'
         },
         popover: {
-          position: "absolute",
-          zIndex: "2",
-          top: "51px",
-          left: "70px"
+          position: 'absolute',
+          zIndex: '2',
+          top: '51px',
+          left: '70px'
         },
         cover: {
-          position: "fixed",
-          top: "0px",
-          right: "0px",
-          bottom: "0px",
-          left: "0px"
+          position: 'fixed',
+          top: '0px',
+          right: '0px',
+          bottom: '0px',
+          left: '0px'
         }
       }
     });
@@ -170,7 +170,7 @@ class AddSubject extends Component {
                 />
                 {this.state.nameErrorMsg.length > 0 ? (
                   <div>
-                    <span style={{ color: "red" }}>
+                    <span style={{ color: 'red' }}>
                       {this.state.nameErrorMsg}
                     </span>
                   </div>
@@ -193,7 +193,7 @@ class AddSubject extends Component {
                 </div>
                 {this.state.colorErrorMsg.length > 0 ? (
                   <div>
-                    <span style={{ color: "red" }}>
+                    <span style={{ color: 'red' }}>
                       {this.state.colorErrorMsg}
                     </span>
                   </div>
