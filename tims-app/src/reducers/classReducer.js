@@ -42,7 +42,8 @@ export const tutionClass = (state = defaultState, action) => {
       };
 
     case TutionClassActionTypes.UPDATE_TUTION_CLASS:
-      const newUpdatedTutionClassList = state.TutionClassList.slice();
+      //CHECK MALU:  here there was a typing misate malu, it was state.TutionClssList.slice()
+      const newUpdatedTutionClassList = state.tutionClassList.slice();
       const indexToUpdate = newUpdatedTutionClassList.findIndex(
         c => c.id === action.payload.id
       );

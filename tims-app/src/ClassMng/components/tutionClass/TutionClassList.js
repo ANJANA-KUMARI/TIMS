@@ -6,7 +6,9 @@ import { ADD_TUTIONCLASS_POPUP_MODE } from "./AddTutionClass";
 export class TutionClassList extends Component {
   constructor(props) {
     super(props);
-    this.props.fetchTutionClasses();
+    // this.props.fetchTutionClasses();
+    // CHECK MALU: updated prop name, it was fetchTutionClasses malu
+    this.props.fetchData();
   }
 
   state = {
