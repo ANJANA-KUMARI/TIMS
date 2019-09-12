@@ -1,0 +1,10 @@
+.input-list > div {
+  width: 100%;
+}
+
+.class-chip {
+  border-radius: 30px;
+  padding: 10px 15px;
+  text-align: center;
+  margin: 10px;
+}

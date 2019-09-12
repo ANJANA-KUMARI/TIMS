@@ -13,6 +13,7 @@ import { dashboardTitleUpdated } from "./actions/UiActions";
 import EmployeeDashboard from "../EmployeeMng/containers/employeeDashboardContainer";
 import TutionClassesPage from "../ClassMng/containers/TutionClassesPage";
 import EmployeesPage from "../EmployeeMng/containers/EmployeesPage";
+import StudentDashboard from "../Student/containers/StudentsPage";
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   updateDashboardTitle: newTitle => dispatch(dashboardTitleUpdated(newTitle))
@@ -64,6 +65,8 @@ class Dashboard extends Component {
               component={EmployeeDashboard}
             />
             <Route path={ROUTE_PATHS.EMPLOYEES} component={EmployeesPage} />
+            <Route path={ROUTE_PATHS.EMPLOYEES} component={EmployeeDashboard} />
+            <Route path={ROUTE_PATHS.STUDENTS} component={StudentDashboard} />
           </div>
         </div>
       </div>

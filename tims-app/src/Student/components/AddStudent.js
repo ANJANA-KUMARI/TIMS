@@ -1,319 +1,242 @@
 import React, { Component } from 'react';
 import {
-    Card,
-    CardActions,
-    CardContent,
-    CardHeader,
-    IconButton,
-    TextField,
-    MenuItem,
-    FormControl,
-    Select,
-    InputLabel,
-    OutlinedInput,
-    Icon
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton,
+  TextField,
+  MenuItem,
+  FormControl,
+  Select,
+  InputLabel,
+  OutlinedInput,
+  Icon
 } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { Cancel, CheckCircle, AccessTime } from '@material-ui/icons';
 import Chip from '@material-ui/core/Chip';
-import './AddTutionClass.css';
+import '../../ClassMng/components/tutionClass/AddTutionClass.css';
+import './AddStudent.css';
 
-class AddTutionClass extends Component {
-    state = {
-        subjects: this.props.subjectList,
-        grades: this.props.gradeList,
-        teachers: this.props.teacherList,
-        types: this.props.tutionClassTypeList,
-        currentTutionClassList: this.props.currentTutionClassList,
-        date: new Date(),
-        startTime: new Date(),
-        endTime: new Date(),
-        venue: '',
-        selectedSubject: -1,
-        selectedGrade: [],
-        selectedTeacher: -1,
-        selectedType: -1,
-        gradeToDisplay: -1,
-        nameErrorMsg: ''
+class AddStudent extends Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    phone: '',
+    selectedTutionClasses: []
+  };
+
+  constructor(props) {
+    super(props);
+    console.log('====================================');
+    console.log(props);
+    console.log('====================================');
+  }
+
+  handleOnClickCreate = () => {
+    const student = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      phone: this.state.phone,
+      address: this.state.address,
+      tutionClasses: this.state.selectedTutionClasses
     };
+    this.props.onCreate(student);
+    this.handleOnClickCancel();
+  };
 
-    handleDateChange = date => {
-        this.setState({
-            selectedDate: date
-        });
-    };
+  handleOnClickCancel = () => {
+    this.props.onClose();
+  };
 
-    handleStartTimeChange = date => {
-        this.setState({
-            startTime: date
-        });
-    };
+  handleChange = (event, changedName) => {
+    this.setState({
+      [changedName]: event.target.value
+    });
+  };
 
-    handleEndTimeChange = date => {
-        this.setState({
-            endTime: date
-        });
-    };
+  handleTutionClassSelect = tClassId => {
+    const classIndex = this.state.selectedTutionClasses.indexOf(tClassId);
 
-    handleDateChange = date => {
-        this.setState({
-            date: date
-        });
-    };
+    const classIds = [...this.state.selectedTutionClasses];
 
-    handleVenueChange = event => {
-        this.setState({
-            venue: event.target.value
-        });
-    };
-
-    handleOnClickCreate = () => {
-        const tutionClass = {
-            subject: this.state.selectedSubject,
-            grades: this.state.selectedGrade,
-            teacher: this.state.selectedTeacher,
-            type: this.state.selectedType,
-            date: this.state.date,
-            venue: this.state.venue,
-            startTime: this.state.startTime,
-            endTime: this.state.endTime
-        };
-        this.props.onCreate(tutionClass);
-        this.handleOnClickCancel();
-    };
-
-    handleOnClickCancel = () => {
-        this.props.onClose();
-    };
-
-    // handleChange = (event, changedName) => {
-    //   this.setState({
-    //     [changedName]: event.target.value
-    //   });
-    // };
-
-    handleSubjectSelect = event => {
-        this.setState({
-            selectedSubject: event.target.value
-        });
-    };
-
-    handleGradeSelect = event => {
-        const currentGrade = this.state.selectedGrade;
-        const selectedGrade = event.target.value;
-        if (currentGrade.includes(selectedGrade)) {
-            alert(
-                `Grade ${selectedGrade} already selected. Please select another Grade!`
-            );
-            return;
-        } else {
-            currentGrade.push(event.target.value);
-            this.setState({
-                selectedGrade: currentGrade,
-                gradeToDisplay: event.target.value
-            });
-        }
-    };
-
-    handleTutionClassTypeSelect = event => {
-        this.setState({
-            selectedType: event.target.value
-        });
-    };
-
-    handleTeacherSelect = event => {
-        this.setState({
-            selectedTeacher: event.target.value
-        });
-    };
-
-    handleDelete = grade => {
-        const deleteSelectedGrade = this.state.selectedGrade;
-        const indexToDelete = deleteSelectedGrade.indexOf(grade);
-        deleteSelectedGrade.splice(indexToDelete, 1);
-        this.setState({
-            selectedGrade: deleteSelectedGrade,
-            gradeToDisplay: -1
-        });
-    };
-
-    render() {
-        return (
-            <div className="add-tution-class-popup">
-                <div className="add-tution-class-backdrop" />
-                <div className="add-tution-class-form">
-                    <Card className="popup-card">
-                        <CardHeader title="Add new class" />
-                        <IconButton
-                            className="popup-cancel-btn"
-                            aria-label="cancel"
-                            onClick={this.handleOnClickCancel}
-                        >
-                            <Cancel />
-                        </IconButton>
-                        <CardContent>
-                            <div className="input-wrap">
-                                <div className="col-1">
-                                    {/* Subject */}
-                                    <div className="subject-wrap">
-                                        <FormControl
-                                            className="subject-input input"
-                                            variant="outlined"
-                                        >
-                                            <InputLabel htmlFor="subject">Subject</InputLabel>
-                                            <Select
-                                                value={this.state.selectedSubject}
-                                                onChange={event => {
-                                                    this.handleSubjectSelect(event);
-                                                }}
-                                                input={
-                                                    <OutlinedInput
-                                                        labelWidth={53}
-                                                        name="subject"
-                                                        id="subject"
-                                                    />
-                                                }
-                                            >
-                                                {this.state.subjects.map((s, i, a) => {
-                                                    return (
-                                                        <MenuItem key={i} value={s.id}>
-                                                            {s.name}
-                                                        </MenuItem>
-                                                    );
-                                                })}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-
-                                    {/* Teacher */}
-                                    <div>
-                                        <FormControl className="input" variant="outlined">
-                                            <InputLabel htmlFor="teacher">Teacher</InputLabel>
-                                            <Select
-                                                value={this.state.selectedTeacher}
-                                                onChange={event => {
-                                                    this.handleTeacherSelect(event);
-                                                }}
-                                                input={
-                                                    <OutlinedInput
-                                                        labelWidth={55}
-                                                        name="teacher"
-                                                        id="teacher"
-                                                    />
-                                                }
-                                            >
-                                                {this.state.teachers.map((t, i, a) => {
-                                                    return (
-                                                        <MenuItem key={i} value={t.id}>
-                                                            {t.firstName} {t.lastName}
-                                                        </MenuItem>
-                                                    );
-                                                })}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-
-                                    {/* Class type */}
-                                    <div>
-                                        <FormControl className="input" variant="outlined">
-                                            <InputLabel htmlFor="type">Type</InputLabel>
-                                            <Select
-                                                value={this.state.selectedType}
-                                                onChange={event => {
-                                                    this.handleTutionClassTypeSelect(event);
-                                                }}
-                                                input={
-                                                    <OutlinedInput
-                                                        labelWidth={35}
-                                                        name="type"
-                                                        id="type"
-                                                    />
-                                                }
-                                            >
-                                                {this.state.types.map((t, i, a) => {
-                                                    return (
-                                                        <MenuItem key={i} value={t.id}>
-                                                            {t.type}
-                                                        </MenuItem>
-                                                    );
-                                                })}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-
-                                    {/* Venue */}
-                                    <div>
-                                        <TextField
-                                            id="outlined-subject-input"
-                                            className="input"
-                                            label="Venue"
-                                            type="text"
-                                            onInput={this.handleVenueChange}
-                                            name="subject_name"
-                                            margin="normal"
-                                            variant="outlined"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="col-2">
-                                    {/* Grade */}
-                                    <div className="grade-wrap">
-                                        <FormControl
-                                            className="grade-input input"
-                                            variant="outlined"
-                                        >
-                                            <InputLabel htmlFor="grade">Grade</InputLabel>
-                                            <Select
-                                                value={this.state.gradeToDisplay}
-                                                onChange={event => {
-                                                    this.handleGradeSelect(event);
-                                                }}
-                                                input={
-                                                    <OutlinedInput
-                                                        labelWidth={47}
-                                                        name="grade"
-                                                        id="grade"
-                                                    />
-                                                }
-                                            >
-                                                {this.state.grades.map((g, i, a) => {
-                                                    return (
-                                                        <MenuItem key={i} value={g.id}>
-                                                            {g.val}
-                                                        </MenuItem>
-                                                    );
-                                                })}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-
-                                   
-                                        
-
-                                      
-                                    
-                                </div>
-                            </div>
-                        </CardContent>
-
-                        <CardActions disableSpacing>
-                            <IconButton
-                                className="popup-create-btn"
-                                aria-label="create"
-                                onClick={this.handleOnClickCreate}
-                            >
-                                <CheckCircle />
-                            </IconButton>
-                        </CardActions>
-                    </Card>
-                </div>
-            </div>
-        );
+    if (classIndex === -1) {
+      classIds.push(tClassId);
+    } else {
+      classIds.splice(classIndex, 1);
     }
+
+    console.log('====================================');
+    console.log('onselect class', classIds, tClassId);
+    console.log('====================================');
+    this.setState({
+      selectedTutionClasses: classIds
+    });
+  };
+
+  render() {
+    return (
+      <div className="add-tution-class-popup">
+        <div className="add-tution-class-backdrop" />
+        <div className="add-tution-class-form">
+          <Card className="popup-card">
+            <CardHeader title="Add new class" />
+            <IconButton
+              className="popup-cancel-btn"
+              aria-label="cancel"
+              onClick={this.handleOnClickCancel}
+            >
+              <Cancel />
+            </IconButton>
+            <CardContent>
+              <div className="row">
+                <div className="col input-list">
+                  {/* firstname */}
+                  <div>
+                    <TextField
+                      id="outlined-fname-input"
+                      className="input"
+                      label="First name"
+                      type="text"
+                      onInput={e => this.handleChange(e, 'firstName')}
+                      name="first_name"
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </div>
+
+                  {/* lastname */}
+                  <div>
+                    <TextField
+                      id="outlined-fname-input"
+                      className="input"
+                      label="Last name"
+                      type="text"
+                      onInput={e => this.handleChange(e, 'lastName')}
+                      name="last_name"
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </div>
+
+                  {/* email */}
+                  <div>
+                    <TextField
+                      id="outlined-fname-input"
+                      className="input"
+                      label="email"
+                      type="email"
+                      onInput={e => this.handleChange(e, 'email')}
+                      name="email"
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </div>
+
+                  {/* phone */}
+                  <div>
+                    <TextField
+                      id="outlined-fname-input"
+                      className="input"
+                      label="Phone"
+                      type="tel"
+                      onInput={e => this.handleChange(e, 'phone')}
+                      name="phone"
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </div>
+
+                  {/* address */}
+                  <div>
+                    <TextField
+                      id="outlined-fname-input"
+                      className="input"
+                      label="Address"
+                      type="text"
+                      onInput={e => this.handleChange(e, 'address')}
+                      name="address"
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+
+                <div className="col">
+                  <h6>Tution classes</h6>
+                  <List>
+                    {this.props.tutionClasses.map((tClass, i, a) => {
+                      const primaryText = (
+                        <span>
+                          Grade{' '}
+                          {tClass.grades.map((g, j, b) => {
+                            if (j > 0) {
+                              return `,${g.val}`;
+                            } else {
+                              return g.val;
+                            }
+                          })}{' '}
+                          {tClass.subject.name}
+                        </span>
+                      );
+                      return (
+                        <ListItem
+                          key={i}
+                          role={undefined}
+                          dense
+                          button
+                          onClick={() => {
+                            this.handleTutionClassSelect(tClass.id);
+                          }}
+                        >
+                          <ListItemIcon>
+                            <Checkbox
+                              edge="start"
+                              checked={
+                                this.state.selectedTutionClasses.indexOf(
+                                  tClass.id
+                                ) !== -1
+                              }
+                              tabIndex={-1}
+                              disableRipple
+                              inputProps={{ 'aria-labelledby': 'tClassLbl' }}
+                            />
+                          </ListItemIcon>
+                          <ListItemText id="tClassLbl" primary={primaryText} />
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                </div>
+              </div>
+            </CardContent>
+
+            <CardActions disableSpacing>
+              <IconButton
+                className="popup-create-btn"
+                aria-label="create"
+                onClick={this.handleOnClickCreate}
+              >
+                <CheckCircle />
+              </IconButton>
+            </CardActions>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default AddTutionClass;
+export default AddStudent;
