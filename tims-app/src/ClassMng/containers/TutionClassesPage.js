@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch, ownprops) => ({
   onDeleteTutionClass: tutionClassId =>
     dispatch(deletetutionClassAsync(tutionClassId)),
   fetchData: () => {
-    // CHECK MALU, here I renamed the function name to fetchData malu, and I added { } to this arrow function, so we can call multiple dispatch() malu
     dispatch(getTutionClassAsync());
     dispatch(getTeachersAsync());
     dispatch(getSubjectsAsync());

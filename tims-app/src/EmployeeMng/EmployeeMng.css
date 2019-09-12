@@ -5,3 +5,7 @@
 .employee-dashboard-shortcut {
   width: 20%;
 }
+
+.employee-dashboard-shortcut:hover {
+  cursor: pointer;
+}

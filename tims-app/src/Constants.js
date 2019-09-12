@@ -9,7 +9,8 @@ export const ROUTE_PATHS = {
   FEE: "/fee/",
   TIMETABLE: "/timetable/",
   STUDY_MATERIAL: "/study-material/",
-  HOMEPAGE: "/"
+  HOMEPAGE: "/",
+  EMPLOYEE_DASHBOARD: "/employee-dashboard/"
 };
 
 export const ROUTE_DASHBOARD_TITLES = [
@@ -23,6 +24,7 @@ export const ROUTE_DASHBOARD_TITLES = [
   { path: ROUTE_PATHS.PARENTS, title: "Parents" },
   { path: ROUTE_PATHS.FEE, title: "Fees" },
   { path: ROUTE_PATHS.TIMETABLE, title: "Time Table" },
-  { path: ROUTE_PATHS.STUDY_MATERIAL, title: "Study Materials" }
+  { path: ROUTE_PATHS.STUDY_MATERIAL, title: "Study Materials" },
+  { path: ROUTE_PATHS.EMPLOYEE_DASHBOARD, title: "Employee dashboard" }
 ];
 export const API_PATH = "http://localhost:5000/v1";

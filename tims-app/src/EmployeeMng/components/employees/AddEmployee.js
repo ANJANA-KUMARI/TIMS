@@ -21,6 +21,13 @@ export const ADD_EMPLOYEE_POPUP_MODE = {
 };
 
 class AddTutionClass extends Component {
+
+    constructor(props){
+        super(props);
+        console.log('====================================');
+        console.log(props);
+        console.log('====================================');
+    }
     state = {
         subjects: this.props.subjectList,
         currentEmployeeList: this.props.currentEmployeeList,
@@ -29,12 +36,13 @@ class AddTutionClass extends Component {
         phone: "",
         email: "",
         address: "",
+        types: this.props.empTypes,
         selectedSubject: -1,
         selectedType: -1,
         nameErrorMsg: "",
         mode: this.props.mode,
-        titleToUpdate: "Update the Class",
-        titleToAdd: "Add a Class"
+        titleToUpdate: "Update the Employee",
+        titleToAdd: "Add a Employee"
     };
 
     componentDidMount() {
@@ -43,6 +51,12 @@ class AddTutionClass extends Component {
            
             });
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            types: nextProps.empTypes
+        })
     }
 
     handleOnClickCreate = () => {
@@ -208,33 +222,33 @@ class AddTutionClass extends Component {
                                         />
                                     </div>
                                     {/* Employee type */}
-                                    {/* <div>
-                                                    <FormControl className="input" variant="outlined">
-                                                        <InputLabel htmlFor="type">Type</InputLabel>
-                                                        <Select
-                                                            value={this.state.selectedType}
-                                                            onChange={event => {
-                                                                this.handleEmployeeTypeSelect(event);
-                                                            }}
-                                                            input={
-                                                                <OutlinedInput
-                                                                    labelWidth={35}
-                                                                    name="type"
-                                                                    id="type"
-                                                                />
-                                                            }
-                                                        >
-                                                            {this.state.types.map((t, i, a) => {
-                                                                return (
-                                                                    <MenuItem key={i} value={t.id}>
-                                                                        {t.type}
-                                                                    </MenuItem>
-                                                                );
-                                                            })}
-                                                        </Select>
-                                                    </FormControl>
-                                                </div> */}
-
+                                 
+                                    <div>
+                                        <FormControl className="input" variant="outlined">
+                                            <InputLabel htmlFor="type">Type</InputLabel>
+                                            <Select
+                                                value={this.state.selectedType}
+                                                onChange={event => {
+                                                    this.handleEmployeeTypeSelect(event);
+                                                }}
+                                                input={
+                                                    <OutlinedInput
+                                                        labelWidth={35}
+                                                        name="type"
+                                                        id="type"
+                                                    />
+                                                }
+                                            >
+                                                {this.state.types.map((t, i, a) => {
+                                                    return (
+                                                        <MenuItem key={i} value={t.id}>
+                                                            {t.type}
+                                                        </MenuItem>
+                                                    );
+                                                })}
+                                            </Select>
+                                        </FormControl>
+                                    </div>
 
                                     {/* Subject */}
                                     <div className="subject-wrap">

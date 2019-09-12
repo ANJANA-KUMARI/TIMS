@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Card, CardContent, IconButton } from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
-import EditIcon from '@material-ui/icons/Edit';
-import './AddTutionClass.css';
-import moment from 'moment';
+import React, { Component } from "react";
+import { Card, CardContent, IconButton } from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
+import EditIcon from "@material-ui/icons/Edit";
+import "./AddTutionClass.css";
+import moment from "moment";
 
 class TutionClass extends Component {
   render() {
@@ -19,27 +19,27 @@ class TutionClass extends Component {
           <CardContent>
             <div className="teacher-name-wrap">
               <span>
-                {this.props.tutionClass.teacher.firstName}{' '}
+                {this.props.tutionClass.teacher.firstName}{" "}
                 {this.props.tutionClass.teacher.lastName}
               </span>
             </div>
 
             <div
               style={{
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                alignItems: "center",
+                justifyContent: "space-between"
               }}
             >
               <div
                 style={{
-                  alignItems: 'center',
-                  paddingRight: '10px'
+                  alignItems: "center",
+                  paddingRight: "10px"
                 }}
               >
                 <div className="edit-icon-wrap">
                   <IconButton
                     style={{
-                      left: '94%'
+                      left: "94%"
                     }}
                     aria-label="eidt"
                     onClick={() =>
@@ -52,14 +52,14 @@ class TutionClass extends Component {
 
                 <div className="clz-name-wrap">
                   <span>
-                    Grade{' '}
+                    Grade{" "}
                     {this.props.tutionClass.grades.map((g, j, b) => {
                       if (j > 0) {
                         return `,${g.val}`;
                       } else {
                         return g.val;
                       }
-                    })}{' '}
+                    })}{" "}
                     {this.props.tutionClass.subject.name}
                   </span>
                 </div>
@@ -82,21 +82,21 @@ class TutionClass extends Component {
                 <div className="tution-clz-item-wrap">
                   <span>
                     <h6>Date : </h6>
-                    {moment(this.props.tutionClass.date).format('dddd')}
+                    {moment(this.props.tutionClass.date).format("dddd")}
                   </span>
                 </div>
 
                 <div className="tution-clz-item-wrap">
                   <span>
                     <h6>Start Time : </h6>
-                    {moment(this.props.tutionClass.startTime).format('LT')}
+                    {moment(this.props.tutionClass.startTime).format("LT")}
                   </span>
                 </div>
 
                 <div className="tution-clz-item-wrap">
                   <span>
                     <h6>End Time : </h6>
-                    {moment(this.props.tutionClass.endTime).format('LT')}
+                    {moment(this.props.tutionClass.endTime).format("LT")}
                   </span>
                 </div>
               </div>
@@ -104,11 +104,11 @@ class TutionClass extends Component {
               <div>
                 <IconButton
                   style={{
-                    left: '90%'
+                    left: "90%"
                   }}
                   aria-label="delete"
                   onClick={() => {
-                    if (window.confirm('Delete tution class ?')) {
+                    if (window.confirm("Delete tution class ?")) {
                       this.props.deleteTutionClass(this.props.tutionClass.id);
                     }
                   }}

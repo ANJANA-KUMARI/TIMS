@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Employee from './Employee';
-import AddEmployeeForm from '../../containers/AddEmployeeForm';
-import { ADD_EMPLOYEE_POPUP_MODE } from './AddEmployee';
+import React, { Component } from "react";
+import Employee from "./Employee";
+import AddEmployeeForm from "../../containers/AddEmployeeForm";
+import { ADD_EMPLOYEE_POPUP_MODE } from "./AddEmployee";
 
 export class EmployeeList extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export class EmployeeList extends Component {
 
   state = {
     showUpdatePopUp: false,
-    tutionClassToUpdate: null,
+    employeeToUpdate: null,
     employees: this.props.employees
   };
 
@@ -21,35 +21,35 @@ export class EmployeeList extends Component {
     });
   };
 
-  handleUpdate = tutionClass => {
+  handleUpdate = employee => {
     this.toggleUpdatePopUp();
     this.setState({
-      tutionClassToUpdate: tutionClass
+      employeeToUpdate: employee
     });
   };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      tutionClasses: nextProps.tutionClasses
+      employees: nextProps.employees
     });
   }
 
   render() {
     return (
-      <div style={{ display: 'flex', padding: '20px', flexWrap: 'wrap' }}>
-        {this.state.tutionClasses.map((t, i, a) => (
-          <TutionClass
-            tutionClass={t}
+      <div style={{ display: "flex", padding: "20px", flexWrap: "wrap" }}>
+        {this.state.employees.map((e, i, a) => (
+          <Employee
+            employee={e}
             key={i}
-            updateTutionClass={this.handleUpdate}
-            deleteTutionClass={this.props.onDeleteTutionClass}
+            updateEmployee={this.handleUpdate}
+            deleteEmployee={this.props.onDeleteEmployee}
           />
         ))}
         {this.state.showUpdatePopUp ? (
-          <AddTutionClassForm
-            mode={ADD_TUTIONCLASS_POPUP_MODE.UPDATE}
+          <AddEmployeeForm
+            mode={ADD_EMPLOYEE_POPUP_MODE.UPDATE}
             onCancelPopup={this.toggleUpdatePopUp}
-            tutionClassToUpdate={this.state.tutionClassToUpdate}
+            employeeToUpdate={this.state.employeeToUpdate}
           />
         ) : null}
       </div>

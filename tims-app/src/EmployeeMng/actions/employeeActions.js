@@ -2,14 +2,16 @@ import {
   createEmployee,
   getEmployees,
   deleteEmployee,
-  updateEmployee
+  updateEmployee,
+  getEmployeeTypes
 } from "../api/employeeApi";
 
 export const EmployeeActionTypes = {
   ADD_EMPLOYEE: "ADD_EMLOYEE",
   UPDATE_EMPLOYEE: "UPDATE_EMLOYEE",
   DELETE_EMPLOYEE: "DELETE_EMLOYEE",
-  EMPLOYEES_LOADED: "EMLOYEES_LOADED"
+  EMPLOYEES_LOADED: "EMLOYEES_LOADED",
+  TYPES_LOADED: "TYPES_LOADED"
 };
 
 // action creators
@@ -32,6 +34,11 @@ const employeeUpdated = updatedEmployee => ({
 const employeeDeleted = employeeId => ({
   type: EmployeeActionTypes.DELETE_EMPLOYEE,
   payload: employeeId
+});
+
+const employeeTypeLoaded = types => ({
+  type: EmployeeActionTypes.TYPES_LOADED,
+  payload: types
 });
 
 // asyc actions
@@ -77,6 +84,17 @@ export const deleteEmployeeAsync = employeeId => {
       }
     } catch (err) {
       console.log("ERROR DELETING EMPLOYEE.");
+    }
+  };
+};
+
+export const getEmployeeTypesAsync = () => {
+  return async function(dispatch, getState) {
+    try {
+      const types = await getEmployeeTypes();
+      dispatch(employeeTypeLoaded(types.data));
+    } catch (err) {
+      // TODO : error
     }
   };
 };

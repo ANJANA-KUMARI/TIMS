@@ -4,7 +4,6 @@ import Header from "./Header";
 import HomePage from "./HomePage";
 import ClassDashboard from "../ClassMng/containers/ClassDashboardContainer";
 import SubjectsPage from "../ClassMng/containers/SubjectsPage";
-import TutionClass from "../ClassMng/containers/TutionClassesPage";
 import StudyMaterialsDashboard from "../StudyMaterial/containers/StudyMaterialDashboardContainer";
 import { Route } from "react-router-dom";
 import { ROUTE_PATHS, ROUTE_DASHBOARD_TITLES } from "../Constants";
@@ -12,6 +11,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { dashboardTitleUpdated } from "./actions/UiActions";
 import EmployeeDashboard from "../EmployeeMng/containers/employeeDashboardContainer";
+import TutionClassesPage from "../ClassMng/containers/TutionClassesPage";
+import EmployeesPage from "../EmployeeMng/containers/EmployeesPage";
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   updateDashboardTitle: newTitle => dispatch(dashboardTitleUpdated(newTitle))
@@ -53,9 +54,16 @@ class Dashboard extends Component {
               path={ROUTE_PATHS.STUDY_MATERIAL}
               component={StudyMaterialsDashboard}
             />
-            <Route path={ROUTE_PATHS.TUTION_CLASS} component={TutionClass} />
+            <Route
+              path={ROUTE_PATHS.TUTION_CLASS}
+              component={TutionClassesPage}
+            />
             {/* <Route path="/" component={HomePage} /> */}
-            <Route path={ROUTE_PATHS.EMPLOYEES} component={EmployeeDashboard} />
+            <Route
+              path={ROUTE_PATHS.EMPLOYEE_DASHBOARD}
+              component={EmployeeDashboard}
+            />
+            <Route path={ROUTE_PATHS.EMPLOYEES} component={EmployeesPage} />
           </div>
         </div>
       </div>

@@ -1,13 +1,15 @@
 import { EmployeeActionTypes } from "../EmployeeMng/actions/employeeActions";
 
 const defaultState = {
-  employeeList: []
+  employeeList: [],
+  employeeTypes: []
 };
 
 export const employees = (state = defaultState, action) => {
   switch (action.type) {
     case EmployeeActionTypes.ADD_EMPLOYEE:
       return {
+        ...state,
         employeeList: [...state.employeeList, action.payload]
       };
 
@@ -18,11 +20,13 @@ export const employees = (state = defaultState, action) => {
       );
       newEmployeeList.splice(indexToDelete, 1);
       return {
+        ...state,
         employeeList: [...newEmployeeList]
       };
 
     case EmployeeActionTypes.EMPLOYEES_LOADED:
       return {
+        ...state,
         employeeList: [...action.payload]
       };
 
@@ -33,7 +37,13 @@ export const employees = (state = defaultState, action) => {
       );
       newUpdatedEmployeeList[indexToUpdate] = action.payload;
       return {
+        ...state,
         employeeList: [...newUpdatedEmployeeList]
+      };
+    case EmployeeActionTypes.TYPES_LOADED:
+      return {
+        ...state,
+        employeeTypes: action.payload
       };
     default:
       return state;

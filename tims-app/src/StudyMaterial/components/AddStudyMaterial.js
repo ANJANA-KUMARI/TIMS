@@ -10,8 +10,7 @@ import {
   FormControl,
   Select,
   InputLabel,
-  OutlinedInput,
-  Icon
+  OutlinedInput
 } from "@material-ui/core";
 
 import { Cancel, CheckCircle, AccessTime } from "@material-ui/icons";

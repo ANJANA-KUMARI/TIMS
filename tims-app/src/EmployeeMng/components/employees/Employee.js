@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Card, CardContent, IconButton } from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
-import EditIcon from '@material-ui/icons/Edit';
-import './AddEmployee.css';
-import moment from 'moment';
+import React, { Component } from "react";
+import { Card, CardContent, IconButton } from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
+import EditIcon from "@material-ui/icons/Edit";
+import "./AddEmployee.css";
+import moment from "moment";
 
 class Employee extends Component {
   render() {
@@ -25,20 +25,20 @@ class Employee extends Component {
 
             <div
               style={{
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                alignItems: "center",
+                justifyContent: "space-between"
               }}
             >
               <div
                 style={{
-                  alignItems: 'center',
-                  paddingRight: '10px'
+                  alignItems: "center",
+                  paddingRight: "10px"
                 }}
               >
                 <div className="edit-icon-wrap">
                   <IconButton
                     style={{
-                      left: '94%'
+                      left: "94%"
                     }}
                     aria-label="eidt"
                     onClick={() =>
@@ -55,6 +55,15 @@ class Employee extends Component {
                       <span>Subject : </span>
                     </h6>
                     {this.props.employee.subject.name}
+                  </span>
+                </div>
+
+                <div className="employee-item-wrap">
+                  <span>
+                    <h6>
+                      <span>Type : </span>
+                    </h6>
+                    {this.props.employee.type.type}
                   </span>
                 </div>
 
@@ -83,11 +92,11 @@ class Employee extends Component {
               <div>
                 <IconButton
                   style={{
-                    left: '90%'
+                    left: "90%"
                   }}
                   aria-label="delete"
                   onClick={() => {
-                    if (window.confirm('Delete employee ?')) {
+                    if (window.confirm("Delete employee ?")) {
                       this.props.deleteEmployee(this.props.employee.id);
                     }
                   }}

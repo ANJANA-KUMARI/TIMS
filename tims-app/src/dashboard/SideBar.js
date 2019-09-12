@@ -26,7 +26,7 @@ class SideBar extends Component {
       id: 4,
       icon: "https://img.icons8.com/ultraviolet/40/000000/employee-card.png",
       title: "Employees",
-      url: ROUTE_PATHS.EMPLOYEES
+      url: ROUTE_PATHS.EMPLOYEE_DASHBOARD
     },
     {
       id: 5,

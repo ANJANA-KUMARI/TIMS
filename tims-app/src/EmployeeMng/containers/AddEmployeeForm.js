@@ -6,7 +6,8 @@ import {
 } from "../actions/employeeActions";
 
 const mapStateToProps = state => ({
-  subjectList: state.subjects.subjectList
+  subjectList: state.subjects.subjectList,
+  empTypes: state.employees.employeeTypes
 });
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
