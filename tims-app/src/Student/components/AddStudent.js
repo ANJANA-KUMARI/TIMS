@@ -92,7 +92,7 @@ class AddStudent extends Component {
         <div className="add-tution-class-backdrop" />
         <div className="add-tution-class-form">
           <Card className="popup-card">
-            <CardHeader title="Add new class" />
+            <CardHeader title="Add new Student" />
             <IconButton
               className="popup-cancel-btn"
               aria-label="cancel"

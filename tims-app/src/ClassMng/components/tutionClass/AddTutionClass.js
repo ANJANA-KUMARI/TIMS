@@ -428,6 +428,15 @@ class AddTutionClass extends Component {
                 className="popup-create-btn"
                 aria-label="create"
                 onClick={this.handleOnClickCreate}
+                disabled={
+                  this.state.selectedSubject === -1 ||
+                  this.state.selectedTeacher === -1 ||
+                  this.state.selectedGrade.length === 0 ||
+                  this.state.selectedType === -1 ||
+                  this.state.venue.length === 0 ||
+                  this.state.startTime.valueOf() ===
+                    this.state.endTime.valueOf()
+                }
               >
                 <CheckCircle />
               </IconButton>
