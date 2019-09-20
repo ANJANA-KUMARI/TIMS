@@ -135,6 +135,8 @@
 
 .tution-clz-card-wrap {
   width: 25%;
+  min-width: 25%;
+  max-width: 25%;
 }
 
 .teacher-image-wrap img {

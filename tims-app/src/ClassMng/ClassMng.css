@@ -32,3 +32,32 @@
 .MuiIconButton-root {
   color: aqua;
 }
+
+.t-class-wrap {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 150px;
+  height: 150px;
+  margin: 10px;
+  position: relative;
+}
+
+.t-class-wrap .wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.t-class-bg {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  opacity: 0.9;
+}
+
+.wrap .content-wrap {
+  z-index: 9;
+}

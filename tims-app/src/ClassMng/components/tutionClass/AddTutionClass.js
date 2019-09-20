@@ -16,8 +16,7 @@ import {
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-  KeyboardDatePicker,
-  TimePicker
+  KeyboardDatePicker
 } from "@material-ui/pickers";
 import "date-fns";
 import Grid from "@material-ui/core/Grid";

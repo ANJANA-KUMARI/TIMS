@@ -10,7 +10,8 @@ import {
 
 const mapStateToProps = state => ({
   subjectsCount: state.subjects.subjectList.length,
-  tutionClassesCount: state.tutionClass.tutionClassList.length
+  tutionClassesCount: state.tutionClass.tutionClassList.length,
+  tutionClasses: state.tutionClass.tutionClassList
 });
 
 const mapDispatchToProps = (dispatch, ownprops) => ({

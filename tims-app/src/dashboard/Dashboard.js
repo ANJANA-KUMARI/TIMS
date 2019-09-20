@@ -14,6 +14,7 @@ import EmployeeDashboard from "../EmployeeMng/containers/employeeDashboardContai
 import TutionClassesPage from "../ClassMng/containers/TutionClassesPage";
 import EmployeesPage from "../EmployeeMng/containers/EmployeesPage";
 import StudentDashboard from "../Student/containers/StudentsPage";
+import TutionClassReportContainer from "../ClassMng/containers/TutionClassReportContainer";
 
 const mapDispatchToProps = (dispatch, ownprops) => ({
   updateDashboardTitle: newTitle => dispatch(dashboardTitleUpdated(newTitle))
@@ -55,6 +56,11 @@ class Dashboard extends Component {
               path={ROUTE_PATHS.STUDY_MATERIAL}
               component={StudyMaterialsDashboard}
             />
+            <Route
+              path={ROUTE_PATHS.TUTION_CLASS_REPORT}
+              component={TutionClassReportContainer}
+            />
+
             <Route
               path={ROUTE_PATHS.TUTION_CLASS}
               component={TutionClassesPage}

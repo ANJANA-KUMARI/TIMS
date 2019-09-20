@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardHeader } from "@material-ui/core";
+import { Card, CardHeader, CardContent } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import "../ClassMng.css";
 import AddSubjectForm from "../containers/AddSubjectForm";
@@ -56,74 +56,163 @@ class ClassDashboard extends Component {
 
   render() {
     return (
-      <div className="shortcut-wrap">
-        <Card className="class-dashboard-shortcut">
-          <Link
-            to={ROUTE_PATHS.SUBJECTS}
-            style={{ textDecoration: "none", color: "black" }}
+      <div>
+        <div className="shortcut-wrap">
+          <Card className="class-dashboard-shortcut">
+            <Link
+              to={ROUTE_PATHS.SUBJECTS}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <CardHeader
+                avatar={
+                  <Avatar>
+                    <img className="w-100" src="/image/subjects.svg" />
+                  </Avatar>
+                }
+                title="Subjects"
+                subheader={this.state.subjectsCount}
+              />
+            </Link>
+          </Card>
+
+          <Card className="class-dashboard-shortcut">
+            <Link
+              to={ROUTE_PATHS.TUTION_CLASS}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <CardHeader
+                avatar={
+                  <Avatar>
+                    <img className="h-100" src="/image/clzes.svg" />
+                  </Avatar>
+                }
+                title="Classes"
+                subheader={this.state.tutionClassesCount}
+              />
+            </Link>
+          </Card>
+
+          <Card
+            onClick={this.toggleAddTutionClassForm}
+            className="class-dashboard-shortcut"
           >
             <CardHeader
               avatar={
                 <Avatar>
-                  <img className="w-100" src="/image/subjects.svg" />
+                  <img className="w-100 h-100" src="/image/class.svg" />
                 </Avatar>
               }
-              title="Subjects"
-              subheader={this.state.subjectsCount}
+              title="Add Class"
             />
-          </Link>
-        </Card>
+          </Card>
 
-        <Card className="class-dashboard-shortcut">
-          <Link
-            to={ROUTE_PATHS.TUTION_CLASS}
-            style={{ textDecoration: "none", color: "black" }}
+          {this.state.showAddTutionClassForm ? (
+            <AddTutionClassForm onCancelPopup={this.toggleAddTutionClassForm} />
+          ) : (
+            ""
+          )}
+
+          <Card
+            onClick={this.toggleAddSubjectForm}
+            className="class-dashboard-shortcut"
           >
             <CardHeader
               avatar={
                 <Avatar>
-                  <img className="h-100" src="/image/clzes.svg" />
+                  <img className="w-100 h-100" src="/image/subject.svg" />
                 </Avatar>
               }
-              title="Classes"
-              subheader={this.state.tutionClassesCount}
+              title="Add Subject"
             />
-          </Link>
-        </Card>
+          </Card>
+        </div>
+        <div>
+          <h3>Today</h3>
+          <div className="shortcut-wrap" style={{ justifyContent: "start" }}>
+            {this.props.tutionClasses
+              .filter(t => {
+                return new Date().getDay() === new Date(t.date).getDay();
+              })
+              .map((t, i, a) => {
+                return (
+                  <Card className="t-class-wrap" key={i}>
+                    <CardContent>
+                      <div className="wrap">
+                        <div
+                          className="t-class-bg"
+                          style={{ backgroundColor: t.subject.color }}
+                        ></div>
+                        <div className="content-wrap">
+                          <div className="clz-name-wrap">
+                            <span>
+                              Grade{" "}
+                              {t.grades.map((g, j, b) => {
+                                if (j > 0) {
+                                  return `,${g.val}`;
+                                } else {
+                                  return g.val;
+                                }
+                              })}{" "}
+                              {t.subject.name}
+                            </span>
+                          </div>
+                          <div>
+                            <span>
+                              {t.teacher.firstName} {t.teacher.lastName}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+          </div>
+        </div>
 
-        <Card
-          onClick={this.toggleAddTutionClassForm}
-          className="class-dashboard-shortcut"
-        >
-          <CardHeader
-            avatar={
-              <Avatar>
-                <img className="w-100 h-100" src="/image/class.svg" />
-              </Avatar>
-            }
-            title="Add Class"
-          />
-        </Card>
-
-        {this.state.showAddTutionClassForm ? (
-          <AddTutionClassForm onCancelPopup={this.toggleAddTutionClassForm} />
-        ) : (
-          ""
-        )}
-
-        <Card
-          onClick={this.toggleAddSubjectForm}
-          className="class-dashboard-shortcut"
-        >
-          <CardHeader
-            avatar={
-              <Avatar>
-                <img className="w-100 h-100" src="/image/subject.svg" />
-              </Avatar>
-            }
-            title="Add Subject"
-          />
-        </Card>
+        <div>
+          <h3>Next</h3>
+          <div className="shortcut-wrap" style={{ justifyContent: "start" }}>
+            {this.props.tutionClasses
+              .filter(t => {
+                return new Date().getDay() + 1 === new Date(t.date).getDay();
+              })
+              .map((t, i, a) => {
+                return (
+                  <Card className="t-class-wrap" key={i}>
+                    <CardContent>
+                      <div className="wrap">
+                        <div
+                          className="t-class-bg"
+                          style={{ backgroundColor: t.subject.color }}
+                        ></div>
+                        <div className="content-wrap">
+                          <div className="clz-name-wrap">
+                            <span>
+                              Grade{" "}
+                              {t.grades.map((g, j, b) => {
+                                if (j > 0) {
+                                  return `,${g.val}`;
+                                } else {
+                                  return g.val;
+                                }
+                              })}{" "}
+                              {t.subject.name}
+                            </span>
+                          </div>
+                          <div>
+                            <span>
+                              {t.teacher.firstName} {t.teacher.lastName}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+          </div>
+        </div>
 
         {this.state.showAddSubjectForm ? (
           <AddSubjectForm

@@ -10,7 +10,8 @@ export const ROUTE_PATHS = {
   TIMETABLE: "/timetable/",
   STUDY_MATERIAL: "/study-material/",
   HOMEPAGE: "/",
-  EMPLOYEE_DASHBOARD: "/employee-dashboard/"
+  EMPLOYEE_DASHBOARD: "/employee-dashboard/",
+  TUTION_CLASS_REPORT: "/tution-class-report/"
 };
 
 export const ROUTE_DASHBOARD_TITLES = [
@@ -25,6 +26,7 @@ export const ROUTE_DASHBOARD_TITLES = [
   { path: ROUTE_PATHS.FEE, title: "Fees" },
   { path: ROUTE_PATHS.TIMETABLE, title: "Time Table" },
   { path: ROUTE_PATHS.STUDY_MATERIAL, title: "Study Materials" },
-  { path: ROUTE_PATHS.EMPLOYEE_DASHBOARD, title: "Employee dashboard" }
+  { path: ROUTE_PATHS.EMPLOYEE_DASHBOARD, title: "Employee dashboard" },
+  { path: ROUTE_PATHS.TUTION_CLASS_REPORT, title: "Tution class Report" }
 ];
 export const API_PATH = "http://localhost:5000/v1";
